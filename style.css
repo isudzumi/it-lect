@@ -1,0 +1,33 @@
+body{
+	background-color:#eeeeee;
+}
+
+#wrapper{
+	background-color:#ffffff;
+	max-width:980px;
+	margin: 0 auto;
+	padding:15px;
+	display:block;
+}
+
+a{
+	display:inline-block;
+	border-radius:6px;
+	line-height:30px;
+	text-align:center;
+	background-color:#efefef;
+	margin:4px;
+	padding:0 32px;
+}
+
+.room{
+	border: 1px solid lightgray;
+	height: 320px;
+	padding 32px;
+	display:none;
+}
+
+.room:target{
+	display: block;
+}
+
