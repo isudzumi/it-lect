@@ -22,12 +22,94 @@ a{
 
 .room{
 	border: 1px solid lightgray;
-	height: 320px;
+	height: 620px;
 	padding 32px;
 	display:none;
+	min-width:600px;
 }
 
 .room:target{
 	display: block;
 }
 
+.board {
+	width: 60%;
+	height:18px;
+	margin: 0 auto;
+	background-color:#efefef;
+	display:block;
+	text-align:center;
+	border: 2px solid black;
+	font-size: 18px;
+}
+
+.desk-area {
+	width: 90%;
+	height:100px;
+	background-color:#eee;
+	margin-right:auto;
+	float: left;
+}
+
+.door-area {
+	width: 10%;
+	margin-left:auto;
+	float: right;
+}
+
+#pc-1112 {
+	width: 50%;
+	height:18px;
+	background-color: lightgray;
+	margin: 0 auto;
+	text-align: center;
+	border: 2px solid black;
+	border-top: none;
+	font-size: 18px;
+}
+
+.door {
+	height: 45px;
+	text-align: center;
+	padding-top:5px;
+	background-color: lightgray;
+	border: 2px solid black;
+}
+
+.column {
+	margin: 10px 0;
+	width : 44%;
+	display:flex;
+	display:-webkit-flex;
+	flex-direction: column;
+	flex-wrap     : nowrap;
+}
+
+.desk-block {
+	width : 33%;
+	display:flex;
+	display:-webkit-flex;
+	flex-direction: row-reverse;
+	flex-wrap     : nowrap;
+	flex-grow     : 1 ;
+}
+/**
+.left{
+	margin-left: 5%;
+	float: left;
+}
+
+.right {
+	margin-right:5%;
+	float: right;
+}
+*/
+.cell {
+	height:37px;
+	padding-top: 13px;
+	margin-top:  10px;
+	background-color: lightgray;
+	text-align: center;
+	font-size:  24px;
+	display: block;
+}
