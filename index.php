@@ -16,68 +16,26 @@
 	<div class="board">スクリーン</div>
 	<div id="pc-1112">教室PC</div>
 		<div class="desk-area">
-			<div class="desk-block">
-				<div class="column right">
-					<div class="cell">1</div>
-					<div class="cell">2</div>
-					<div class="cell">3</div>
-					<div class="cell">4</div>
-					<div class="cell">5</div>
-				</div>
-				<div class="column left">
-					<div class="cell">6</div>
-					<div class="cell">7</div>
-					<div class="cell">8</div>
-					<div class="cell">9</div>
-					<div class="cell">10</div>
-				</div>
-			</div>
-			<div class="desk-block">
-				<div class="column right">
-					<div class="cell">11</div>
-					<div class="cell">12</div>
-					<div class="cell">13</div>
-					<div class="cell">14</div>
-					<div class="cell">15</div>
-					<div class="cell">16</div>
-					<div class="cell">17</div>
-				</div>
-				<div class="column left">
-					<div class="cell">18</div>
-					<div class="cell">19</div>
-					<div class="cell">20</div>
-					<div class="cell">21</div>
-					<div class="cell">22</div>
-					<div class="cell">23</div>
-					<div class="cell">24</div>
-				</div>
-			</div>
-			<div class="desk-block">
-				<div class="column right">
-					<div class="cell">25</div>
-					<div class="cell">26</div>
-					<div class="cell">27</div>
-					<div class="cell">28</div>
-					<div class="cell">29</div>
-					<div class="cell">30</div>
-					<div class="cell">31</div>
-				</div>
-				<div class="column left">
-					<div class="cell">32</div>
-					<div class="cell">33</div>
-					<div class="cell">34</div>
-					<div class="cell">35</div>
-					<div class="cell">36</div>
-					<div class="cell">37</div>
-					<div class="cell">38</div>
-				</div>
-			</div>
+			<?php
+			for($i=1; $i<=38; $i++){
+				if($i == 1 || $i == 11 || $i == 25){
+					echo "<div class='desk-block'>\n", "\t<div class='column right'>\n";
+				}
+				if($i == 6 || $i == 18 || $i == 32){
+					echo "\t</div>\n", "\t<div class='column left'>\n";
+				}
 
+					echo "\t\t<div class='cell'>".$i."</div>\n";
 
+				if($i == 10 || $i == 24 || $i == 38){
+					echo "\t</div>\n", "</div>\n";
+				}
+			}
+			?>
 		</div>
 		<div class="door-area">
 			<div class="door wall">前方ドア</div>
-			<div class="door">後方ドア<br>(※締切)</div>
+			<div class="door">後方ドア(※締切)</div>
 		</div>
 	</div>
 	<div id="1111" class="room">1111</div>
