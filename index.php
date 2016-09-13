@@ -60,8 +60,8 @@
 			?>
 		</div>
 		<div class="door-area">
-			<div class="door wall">前方ドア</div>
-			<div class="door">後方ドア(※締切)</div>
+			<div class="door wall">前方ドア(※締切)</div>
+			<div class="door">後方ドア</div>
 		</div>
 	</div>
 
