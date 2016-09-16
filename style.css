@@ -56,15 +56,23 @@ a{
 	float: right;
 }
 
-#pc-1112 {
-	width: 40%;
-	height:18px;
+.pc {
+	height: 18px;
 	background-color: lightgray;
-	margin: 0 auto;
 	text-align: center;
 	border: 2px solid black;
-	border-top: none;
 	font-size: 16px;
+}
+
+#pc-1112 {
+	width: 40%;
+	margin: 0 auto;
+	border-top: none;
+}
+
+#pc-1111 {
+	margin-right:auto;
+	width: 30%;
 }
 
 .door {

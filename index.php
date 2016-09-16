@@ -14,14 +14,14 @@
 	</nav>
 	<div id="1112" class="room">
 	<div class="board">スクリーン</div>
-	<div id="pc-1112">教室PC</div>
+	<div class="pc" id="pc-1112">教室PC</div>
 		<div class="desk-area">
 			<?php
 			for($i=1; $i<=38; $i++){
 				if($i == 1 || $i == 11 || $i == 25){
 					echo "<div class='desk-block'>\n", "\t<div class='column right'>\n";
 				}
-				if($i == 6 || $i == 18 || $i == 32){
+				if($i == 6 || $i == 18 || $i == 32)
 					echo "\t</div>\n", "\t<div class='column left'>\n";
 				}
 
@@ -40,7 +40,7 @@
 	</div>
 	<div id="1111" class="room">
 	<div class="board">スクリーン</div>
-	<div id="pc-1112">教室PC</div>
+	<div class = "pc" id="pc-1111">教室PC</div>
 		<div class="desk-area">
 			<?php
 			for($i=1; $i<=36; $i++){
@@ -67,7 +67,7 @@
 
 	<div id="1110" class="room">
 	<div class="board">スクリーン</div>
-	<div id="pc-1112">教室PC</div>
+	<div class="pc" id="pc-1112">教室PC</div>
 		<div class="desk-area">
 			<?php
 			for($i=1; $i<=38; $i++){
