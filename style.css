@@ -50,6 +50,10 @@ a{
 	float: left;
 }
 
+#desk-back{
+	margin-top: 90px;
+}
+
 .door-area {
 	width: 5%;
 	margin-left:auto;
