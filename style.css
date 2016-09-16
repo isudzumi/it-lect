@@ -62,12 +62,14 @@ a{
 	width: 5%;
 }
 
-.door-left {
+.door-area-left {
 	float: left;
+	margin-right:auto;
 }
 
-.door-right {
+.door-area-right {
 	float: right;
+	margin-left :auto;
 }
 
 .door {
@@ -75,7 +77,6 @@ a{
 	height: 20%;
 	text-align: center;
 	vertical-align:middle;
-	margin-left:auto;
 	padding:10px 0;
 	background-color: lightgray;
 	font-size:16px;
@@ -87,6 +88,14 @@ a{
 
 .wall {
 	margin-bottom: 450px;
+}
+
+.door-left {
+	margin-right:auto;
+}
+
+.door-right{
+	margin-left :auto;
 }
 
 .pc {

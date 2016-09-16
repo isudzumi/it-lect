@@ -33,9 +33,9 @@
 			}
 			?>
 		</div>
-		<div class="door-area door-right">
-			<div class="door wall">前方ドア</div>
-			<div class="door">後方ドア(※締切)</div>
+		<div class="door-area door-area-right">
+			<div class="door wall door-right">前方ドア</div>
+			<div class="door door-right">後方ドア(※締切)</div>
 		</div>
 	</div>
 	<div id="1111" class="room">
@@ -61,18 +61,18 @@
 			}
 			?>
 		</div>
-		<div class="door-area door-right">
-			<div class="door wall">前方ドア(※締切)</div>
-			<div class="door">後方ドア</div>
+		<div class="door-area door-area-right">
+			<div class="door wall door-right">前方ドア(※締切)</div>
+			<div class="door door-right">後方ドア</div>
 		</div>
 	</div>
 
 	<div id="1110" class="room">
 	<div class="board">スクリーン</div>
 	<div class="pc" id="pc-1110">教員PC</div>
-		<div class="door-area door-left">
-			<div class="door wall">前方ドア</div>
-			<div class="door">後方ドア(※締切)</div>
+		<div class="door-area door-area-left">
+			<div class="door wall door-left">前方ドア</div>
+			<div class="door door-left">後方ドア(※締切)</div>
 		</div>
 		<div class="desk-area door-right">
 			<?php
