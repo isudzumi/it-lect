@@ -21,7 +21,7 @@
 				if($i == 1 || $i == 11 || $i == 25){
 					echo "<div class='desk-block'>\n", "\t<div class='column right'>\n";
 				}
-				if($i == 6 || $i == 18 || $i == 32)
+				if($i == 6 || $i == 18 || $i == 32) {
 					echo "\t</div>\n", "\t<div class='column left'>\n";
 				}
 
