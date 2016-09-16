@@ -71,8 +71,10 @@
 		<div class="desk-area">
 			<?php
 			for($i=1; $i<=38; $i++){
-				if($i == 1 || $i == 11 || $i == 25){
+				if($i == 1 || $i == 11){
 					echo "<div class='desk-block'>\n", "\t<div class='column right'>\n";
+				} elseif ($i == 25) {
+					echo "<div class='desk-block' id='desk-back'>\n", "\t<div class='column right'>\n";
 				}
 				if($i == 6 || $i == 18 || $i == 32){
 					echo "\t</div>\n", "\t<div class='column left'>\n";
