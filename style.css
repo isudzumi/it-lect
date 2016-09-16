@@ -59,12 +59,32 @@ a{
 
 .door-area {
 	width: 5%;
-	margin-left:auto;
-	float: right;
 }
 
 .door-left {
 	float: left;
+}
+
+.door-right {
+	float: right;
+}
+
+.door {
+	width: 18px;
+	height: 20%;
+	text-align: center;
+	margin-left:auto;
+	padding:10px 0;
+	background-color: lightgray;
+	font-size:16px;
+	border: 2px solid black;
+	writing-mode: vertical-rl;
+	-webkit-writing-mode: vertical-rl;//Safari用
+	-ms-writing-mode: tb-rl;          //IE用
+}
+
+.wall {
+	margin-bottom: 450px;
 }
 
 .pc {
@@ -88,24 +108,6 @@ a{
 	width: 30%;
 }
 
-.door {
-	width: 18px;
-	height: 20%;
-	text-align: center;
-	margin-left:auto;
-	padding:10px 0;
-	background-color: lightgray;
-	font-size:16px;
-	border: 2px solid black;
-	writing-mode: vertical-rl;
-	-webkit-writing-mode: vertical-rl;//Safari用
-	-ms-writing-mode: tb-rl;          //IE用
-}
-
-.wall {
-	margin-bottom: 450px;
-}
-
 .column {
 	margin: 10px 0;
 	width : 44%;
@@ -117,6 +119,9 @@ a{
 
 .desk-block {
 	width : 33%;
+}
+
+.desk-right {
 	display:flex;
 	display:-webkit-flex;
 	flex-direction: row-reverse;
@@ -125,7 +130,7 @@ a{
 	float:right;
 }
 
-.row {
+.desk-left {
 	display:flex;
 	display:-webkit-flex;
 	flex-direction: row;

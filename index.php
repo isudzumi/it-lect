@@ -19,7 +19,7 @@
 			<?php
 			for($i=1; $i<=38; $i++){
 				if($i == 1 || $i == 11 || $i == 25){	//the number of the upper left desk
-					echo "<div class='desk-block'>\n", "\t<div class='column right'>\n";
+					echo "<div class='desk-block desk-right'>\n", "\t<div class='column right'>\n";
 				}
 				if($i == 6 || $i == 18 || $i == 32) {	//the number of the upper right desk
 					echo "\t</div>\n", "\t<div class='column left'>\n";
@@ -33,7 +33,7 @@
 			}
 			?>
 		</div>
-		<div class="door-area">
+		<div class="door-area door-right">
 			<div class="door wall">前方ドア</div>
 			<div class="door">後方ドア(※締切)</div>
 		</div>
@@ -45,9 +45,9 @@
 			<?php
 			for($i=1; $i<=36; $i++){
 				if($i == 1 || $i == 11){
-					echo "<div class='desk-block'>\n", "\t<div class='column right'>\n";
+					echo "<div class='desk-block desk-right'>\n", "\t<div class='column right'>\n";
 				} elseif ($i == 25){
-					echo "<div class='desk-block' id='desk-back'>\n", "\t<div class='column right'>\n";
+					echo "<div class='desk-block desk-right' id='desk-back'>\n", "\t<div class='column right'>\n";
 				}
 				if($i == 6 || $i == 18 || $i == 31){
 					echo "\t</div>\n", "\t<div class='column left'>\n";
@@ -61,7 +61,7 @@
 			}
 			?>
 		</div>
-		<div class="door-area">
+		<div class="door-area door-right">
 			<div class="door wall">前方ドア(※締切)</div>
 			<div class="door">後方ドア</div>
 		</div>
@@ -78,7 +78,7 @@
 			<?php
 			for($i=1; $i<=38; $i++){
 				if($i == 1 || $i == 11 || $i == 25){
-					echo "<div class='desk-block row'>\n", "\t<div class='column left'>\n";
+					echo "<div class='desk-block desk-left'>\n", "\t<div class='column left'>\n";
 				}
 				if($i == 6 || $i == 18 || $i == 32){
 					echo "\t</div>\n", "\t<div class='column right'>\n";
