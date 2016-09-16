@@ -47,7 +47,7 @@
 				if($i == 1 || $i == 11){
 					echo "<div class='desk-block'>\n", "\t<div class='column right'>\n";
 				} elseif ($i == 25){
-					echo "<div class='desk-block' id='deks-back'>\n", "\t<div class='column right'>\n";
+					echo "<div class='desk-block' id='desk-back'>\n", "\t<div class='column right'>\n";
 				}
 				if($i == 6 || $i == 18 || $i == 31){
 					echo "\t</div>\n", "\t<div class='column left'>\n";
