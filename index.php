@@ -43,17 +43,17 @@
 	<div id="pc-1112">教室PC</div>
 		<div class="desk-area">
 			<?php
-			for($i=1; $i<=38; $i++){
+			for($i=1; $i<=36; $i++){
 				if($i == 1 || $i == 11 || $i == 25){
 					echo "<div class='desk-block'>\n", "\t<div class='column right'>\n";
 				}
-				if($i == 6 || $i == 18 || $i == 32){
+				if($i == 6 || $i == 18 || $i == 31){
 					echo "\t</div>\n", "\t<div class='column left'>\n";
 				}
 
 					echo "\t\t<div class='cell'>".$i."</div>\n";
 
-				if($i == 10 || $i == 24 || $i == 38){
+				if($i == 10 || $i == 24 || $i == 36){
 					echo "\t</div>\n", "</div>\n";
 				}
 			}
