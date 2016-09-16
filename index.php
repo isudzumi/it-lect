@@ -25,7 +25,7 @@
 					echo "\t</div>\n", "\t<div class='column left'>\n";
 				}
 
-					echo "\t\t<div class='cell'>".$i."</div>\n";
+					echo "\t\t<div class='cell'><a href=#modal>".$i."</a></div>\n";
 
 				if($i == 10 || $i == 24 || $i == 38){	//the number of the lower left desk
 					echo "\t</div>\n", "</div>\n";
@@ -92,6 +92,11 @@
 			}
 			?>
 		</div>
+	</div>
+	<div id=modal>
+		<h2>Modal Box Test</h2>
+		<p>Test</p>
+		<a href="#" aria-label="Close Modal"></a>
 	</div>
 </div>
 </body>
