@@ -39,6 +39,7 @@ a{
 	background-color:#efefef;
 	display:block;
 	text-align:center;
+	vertical-align:middle;
 	border: 2px solid black;
 	font-size: 16px;
 }
@@ -73,6 +74,7 @@ a{
 	width: 18px;
 	height: 20%;
 	text-align: center;
+	vertical-align:middle;
 	margin-left:auto;
 	padding:10px 0;
 	background-color: lightgray;
@@ -91,21 +93,25 @@ a{
 	height: 18px;
 	background-color: lightgray;
 	text-align: center;
+	vertical-align:middle;
 	border: 2px solid black;
 	font-size: 16px;
 }
 
 #pc-1112 {
-	width: 40%;
+	width: 30%;
 	margin: 0 auto;
 	border-top: none;
 }
 
 #pc-1111 {
-	margin-right:auto;
-	margin-left :3%;
-	margin-top  :30px;
+	width : 30%;
+	margin: 10px auto 0 3%;
+}
+
+#pc-1110 {
 	width: 30%;
+	margin: 10px 3% 0 auto;
 }
 
 .column {

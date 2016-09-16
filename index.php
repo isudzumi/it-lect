@@ -69,7 +69,7 @@
 
 	<div id="1110" class="room">
 	<div class="board">スクリーン</div>
-	<div class="pc" id="pc-1112">教員PC</div>
+	<div class="pc" id="pc-1110">教員PC</div>
 		<div class="door-area door-left">
 			<div class="door wall">前方ドア</div>
 			<div class="door">後方ドア(※締切)</div>
