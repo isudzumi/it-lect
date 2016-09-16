@@ -74,9 +74,9 @@ a{
 }
 
 #pc-1111 {
-	margin-left :5%;
+	margin-right:auto;
+	margin-left :3%;
 	margin-top  :30px;
-	float:left;
 	width: 30%;
 }
 
@@ -84,6 +84,7 @@ a{
 	width: 18px;
 	height: 20%;
 	text-align: center;
+	margin-left:auto;
 	padding:10px 0;
 	background-color: lightgray;
 	font-size:16px;
