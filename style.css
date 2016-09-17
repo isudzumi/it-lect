@@ -180,16 +180,7 @@ a:hover{
 	position:relative;
 }
 
-.cell a {
-	display:block;
-	width :100%;
-	height:100%;
-	text-decoration:none;
-	font-color:black;
-	position:absolute;
-}
-
-.cell a:hover{
+.cell:hover{
 	background-color:#efefef;
 	cursor:pointer;
 }
@@ -201,37 +192,25 @@ a:hover{
 	width :100%;
 	height:120%;
 	background:rgba(0,0,0,0.8);
-	display:flex;
-	justify-content:center;
-	align-items:center;
-}
-
-#modal-overlay:target{
-	display:block;
+	z-index:1;
 }
 
 #modal {
-	width: 30%;
-	height:10%;
+	position:fixed;
+	width: 600px;
+	height:8em;
 	background-color: #efefef;
 	border: 1px solid black;
 	margin: 1.5em auto 0;
 	text-align:center;
+	top :50%;
+	left:50%;
+	margin-top :-4em;
+	margin-left:-300px;
 	z-index:2;
 }
 
-.button-link {
-	cursor:pointer;
+.is-hide {
+	display:none;
 }
 
-#modal-overlay:not(:target) {
-	opacity: 0;
-	visibility: hidden;
-	transition: opacity 1s, visibility 1s;
-}
-
-#modal-overlay:target {
-	opacity : 1;
-	visibility: visible;
-	transition: opacity 1s, visibility 1s;
-}
