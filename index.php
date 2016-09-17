@@ -2,6 +2,7 @@
 <head>
 <meta charset="utf-8">
 <link rel="stylesheet" type="text/css" href="./style.css">
+<script type="text/javascript" src="//code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
 
 <body>
@@ -25,7 +26,7 @@
 					echo "\t</div>\n", "\t<div class='column left'>\n";
 				}
 
-					echo "\t\t<div class='cell'><a href=#modal>".$i."</a></div>\n";
+					echo "\t\t<div class='cell'><a href=#modal-overlay>".$i."</a></div>\n";
 
 				if($i == 10 || $i == 24 || $i == 38){	//the number of the lower left desk
 					echo "\t</div>\n", "</div>\n";
@@ -93,10 +94,12 @@
 			?>
 		</div>
 	</div>
-	<div id=modal>
-		<h2>Modal Box Test</h2>
-		<p>Test</p>
-		<a href="#" aria-label="Close Modal"></a>
+	<div id="modal-overlay">
+		<div id=modal>
+			<h2>Modal Box Test</h2>
+			<p>Test</p>
+			<a id="modal-close" class="button-link">×</a>
+		</div>
 	</div>
 </div>
 </body>
