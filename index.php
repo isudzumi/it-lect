@@ -97,7 +97,7 @@
 	<div id="modal" class="is-hide">
 		<h2>Modal Box Test</h2>
 		<p>Test</p>
-		<a id="modal-close" class="button-link">×</a>
+		<input type="button" value="OK"><input type="button" id="modal-close" value="Cancel">
 	</div>
 
 </div>
