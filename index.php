@@ -95,27 +95,27 @@
 		</div>
 	</div>
 	<div id="modal" class="is-hide">
-		<h2>Modal Box Test</h2>
-		<p>Test</p>
-		<input type="button" value="OK"><input type="button" id="modal-close" value="Cancel">
+		<div id="modal-comment"></div>
+		<button type="submit">OK</button> <button id="modal-close">Cancel</button> 
 	</div>
 
 </div>
 </body>
 
 <script>
-	$(function(){
-		$(".cell").click(function(){
-			$("body").append("<div id='modal-overlay'></div>");
-			$("#modal-overlay").fadeIn("slow");
-			$("#modal").fadeIn("slow").removeClass("is-hide");
-			$("#modal-overlay, #modal-close").unbind().click(function(){
-				$("#modal, #modal-overlay").fadeOut("slow", function(){
-					$("#modal-overlay").remove();
+			$(function(){
+				$(".cell").click(function(){
+					$("body").append("<div id='modal-overlay'></div>");
+					$("#modal-overlay").fadeIn("slow");
+					var i = $(this).html();
+					$("#modal-comment").append("<p id='comment'>"+i+"番の座席を使用中にしますか？</p>");
+					$("#modal").fadeIn("slow").removeClass("is-hide");
+					$("#modal-overlay, #modal-close").unbind().click(function(){
+						$("#modal, #modal-overlay").fadeOut("slow", function(){
+							$("#modal-overlay, #comment").remove();
+						});
+					});
 				});
 			});
-		});
-	});
-
 </script>
 
