@@ -192,7 +192,7 @@ a:hover{
 	position:fixed;
 	top:0;
 	left:0;
-	width :100%;
+	eidth :100%;
 	height:120%;
 	background:rgba(0,0,0,0.8);
 	z-index:1;
@@ -212,6 +212,16 @@ a:hover{
 	margin-left:-300px;
 	z-index:2;
 	box-shadow: 5px 5px 5px rgba(0,0,0,0.4);
+}
+
+button{
+	height: 2em;
+	width : 5em;
+	background-color:#efefef;
+}
+
+button:nth-of-type(1){
+	background-color:lightgreen;
 }
 
 .is-hide {
