@@ -113,8 +113,9 @@
 					$("#modal-overlay, #modal-close").unbind().click(function(){
 						fadeout();
 					});
+					var c = $(this)
 					$("#submit").click(function(){
-						$(".cell").css("background-color","yellow");
+						c.css("background-color","yellow");
 						fadeout();
 					});
 				});
