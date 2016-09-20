@@ -107,22 +107,21 @@
 				$(".cell").click(function(){
 					$("body").append("<div id='modal-overlay'></div>");
 					$("#modal-overlay").fadeIn("slow");
-					console.log(c);
 					var c = $(this);
-					Console.log(c);
+					console.log(c);
 					$("#modal-comment").append("<p id='comment'>"+c.html()+"番の座席を使用中にしますか？</p>");
 					$("#modal").fadeIn("slow").removeClass("is-hide");
 					$("#modal-overlay, #modal-close").unbind().click(function(){
 						delete c;	//メモリ解放
 						fadeout();
 					});
-					Console.log(c);
+					console.log(c);
 					$("#submit").click(function(){
 						c.css("background-color","yellow");
 						delete c;
 						fadeout();
 					});
-					Console.log(c);
+					console.log(c);
 				});
 			});
 
