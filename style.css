@@ -223,7 +223,7 @@ button {
 	border: none;
 	font-size: 16px;
 	font-weight:bold;
-	padding 5px 10px;
+	padding:5px 40px;
 }
 
 button:nth-of-type(1){

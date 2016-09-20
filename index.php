@@ -92,7 +92,7 @@
 				}
 			}
 			?>
-		</div>48
+		</div>
 	</div>
 	<div id="modal" class="is-hide">
 		<div id="modal-comment"></div>
