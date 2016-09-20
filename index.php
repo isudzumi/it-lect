@@ -110,7 +110,9 @@
 					var i = $(this).html();
 					$("#modal-comment").append("<p id='comment'>"+i+"番の座席を使用中にしますか？</p>");
 					$("#modal").fadeIn("slow").removeClass("is-hide");
-					$("#modal-overlay, #modal-close").unbind().click(fadeout(););
+					$("#modal-overlay, #modal-close").unbind().click(function(){
+						fadeout();
+					});
 					$("#submit").click(function(){
 						$(this).css("background-color","yellow");
 						fadeout();
