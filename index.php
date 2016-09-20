@@ -114,7 +114,7 @@
 						fadeout();
 					});
 					$("#submit").click(function(){
-						$(this).css("background-color","yellow");
+						$(".cell").css("background-color","yellow");
 						fadeout();
 					});
 				});
