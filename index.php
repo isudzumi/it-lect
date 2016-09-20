@@ -92,11 +92,11 @@
 				}
 			}
 			?>
-		</div>
+		</div>48
 	</div>
 	<div id="modal" class="is-hide">
 		<div id="modal-comment"></div>
-		<button type="submit">OK</button> <button id="modal-close">Cancel</button> 
+		<button type="submit" id="submit">OK</button> <button id="modal-close">Cancel</button> 
 	</div>
 
 </div>
@@ -110,12 +110,18 @@
 					var i = $(this).html();
 					$("#modal-comment").append("<p id='comment'>"+i+"番の座席を使用中にしますか？</p>");
 					$("#modal").fadeIn("slow").removeClass("is-hide");
-					$("#modal-overlay, #modal-close").unbind().click(function(){
-						$("#modal, #modal-overlay").fadeOut("slow", function(){
-							$("#modal-overlay, #comment").remove();
-						});
+					$("#modal-overlay, #modal-close").unbind().click(fadeout(););
+					$("#submit").click(function(){
+						$(this).css("background-color","yellow");
+						fadeout();
 					});
 				});
 			});
+
+			function fadeout(){
+				$("#modal, #modal-overlay").fadeOut("slow", function(){
+					$("#modal-overlay, #comment").remove();
+				});
+			}
 </script>
 
