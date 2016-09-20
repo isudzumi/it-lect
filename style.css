@@ -214,6 +214,22 @@ a:hover{
 	box-shadow: 5px 5px 5px rgba(0,0,0,0.4);
 }
 
+#comment {
+	height:4em;
+	line-height:4em;
+}
+
+button {
+	border: none;
+	font-size: 16px;
+	font-weight:bold;
+	padding 5px 10px;
+}
+
+button:nth-of-type(1){
+	background-color:lightgreen;
+}
+
 .is-hide {
 	display:none;
 }
