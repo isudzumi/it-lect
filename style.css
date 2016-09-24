@@ -201,7 +201,7 @@ a:hover{
 #modal {
 	position:fixed;
 	width: 600px;
-	height:8em;
+	height:9em;
 	background-color: #efefef;
 	border: 1px solid black;
 	margin: 1.5em auto 0;
