@@ -110,12 +110,16 @@
 					var c = $(this);
 					$("#modal-comment").append("<p id='comment'>"+c.html()+"番の座席を使用中にしますか？</p>");
 					$("#modal").fadeIn("slow").removeClass("is-hide");
-					$("#modal-overlay, #modal-close").unbind().click(function(){
+					$(document).off().on("click", function(e){
+					var idName = e.target.id;
+					console.log(idName);
+					if( idName == "modal-overlay" || idName == "modal-close" ){
 						fadeout();
-					});
-					$("#submit").click(function(){
-						c.css("background-color","yellow");
+					}else if( idName == "submit" ){
+						c.css("background-color", "yellow");
 						fadeout();
+					}
+					delete c;
 					});
 				});
 			});
