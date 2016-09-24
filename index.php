@@ -108,21 +108,31 @@
 					$("body").append("<div id='modal-overlay'></div>");
 					$("#modal-overlay").fadeIn("slow");
 					var c = $(this);
-					$("#modal-comment").append("<p id='comment'>"+c.html()+"番の座席を使用中にしますか？</p>");
-					$("#modal").fadeIn("slow").removeClass("is-hide");
-					$(document).off().on("click", function(e){
-					var idName = e.target.id;
-					console.log(idName);
-					if( idName == "modal-overlay" || idName == "modal-close" ){
-						fadeout();
-					}else if( idName == "submit" ){
-						c.css("background-color", "yellow");
-						fadeout();
+					var bgColor = c.css("background-color");
+					if(bgColor == "rgb(239, 239, 239)"){		//#efefef
+						modalAction(c, "toUsing");
+					} else if( bgColor == "rgb(255, 255, 0)"){	//yellow
+						modalAction(c, "toEmpty");
 					}
 					delete c;
-					});
 				});
 			});
+
+			function modalAction(c, action){
+				var msg = (action == "toUsing") ? "使用中" : "空席" ;
+				$("#modal-comment").append("<p id='comment'>"+c.html()+"番の座席を"+msg+"にしますか？</p>");
+				$("#modal").fadeIn("slow").removeClass("is-hide");
+				$(document).off().on("click", function(e){
+				var idName = e.target.id;
+				if( idName == "modal-overlay" || idName == "modal-close" ){
+					fadeout();
+				}else if( idName == "submit" ){
+					var color = (action == "toUsing") ? "yellow" : "" ;
+					c.css("background-color", color);
+					fadeout();
+				}
+				});
+			}
 
 			function fadeout(){
 				$("#modal, #modal-overlay").fadeOut("slow", function(){
