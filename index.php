@@ -7,8 +7,37 @@
 
 <body>
 <?php
-$db = parse_url($_SERVER[getenv('CLEARDB_DATABASE_URL')]);
-echo $db;
+$db = parse_url($_SERVER('CLEARDB_DATABASE_URL'));
+$db['dbname'] = ltrim($db['path'], '/');
+$dsn = "{$db['scheme']}:host={$db['host']};dbname={$db['dbname']};charset=utf8";
+
+try {
+	$db = new PDO($dsn, $db['user'], $db['pass']);
+	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+	$sql = 'SELECT * FROM desk where room = 1112';
+	$prepare = $db->prepare($sql);
+
+	echo '<pre>';
+	$prepare->execute();
+	$result = $prepare->fetchAll(PDO::FETCH_ASSOC);
+	print_r(h($result));
+	echo "\n";
+	echo '</pre>';
+
+} catch (PODException $e) {
+	echo "Error: " . h($e->getMessage());
+}
+
+function h($var)
+{
+    if (is_array($var)) {
+	return array_map('h', $var);
+    } else {
+	return htmlspecialchars($var, ENT_QUOTES, 'UTF-8');
+    }
+}
 ?>
 <div id="wrapper">
 <h1>試験教室　座席表</h1>
@@ -30,7 +59,8 @@ echo $db;
 					echo "\t</div>\n", "\t<div class='column left'>\n";
 				}
 
-					echo "\t\t<div class='cell'>".$i."</a></div>\n";
+				$stat = (h($result[$i-1]['status']) == 0) ? "" : ' style="background-color: yellow"' ;
+					echo "\t\t<div class='cell'".$stat.">".$i."</a></div>\n";
 
 				if($i == 10 || $i == 24 || $i == 38){	//the number of the lower left desk
 					echo "\t</div>\n", "</div>\n";
@@ -117,6 +147,8 @@ echo $db;
 						modalAction(c, "toUsing");
 					} else if( bgColor == "rgb(255, 255, 0)"){	//yellow
 						modalAction(c, "toEmpty");
+					} else {
+						fade();
 					}
 					delete c;
 				});
@@ -144,4 +176,8 @@ echo $db;
 				});
 			}
 </script>
+
+<?php
+			$updatesql = "update desk set status = 1";
+?>
 
