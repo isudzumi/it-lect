@@ -6,6 +6,10 @@
 </head>
 
 <body>
+<?php
+$db = parse_url($_SERVER[getenv('CLEARDB_DATABASE_URL')]);
+echo $db;
+?>
 <div id="wrapper">
 <h1>試験教室　座席表</h1>
 	<nav>
