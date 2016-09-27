@@ -48,6 +48,12 @@ function h($var)
 		<a href="#1111">1111教室</a>
 		<a href="#1110">1110教室</a>
 	</nav>
+	<?php
+	$roomAry = array(1112, 1111, 1110);
+	foreach($roomAry as $room){
+		print $room;
+	}
+	?>
 	<div id="1112" class="room">
 	<div class="board">スクリーン</div>
 	<div class="pc" id="pc-1112">教員PC</div>
