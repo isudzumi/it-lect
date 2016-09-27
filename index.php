@@ -7,6 +7,8 @@
 
 <body>
 <?php
+putenv("CLEARDB_DATABASE_URL=mysql://be39339f7ce21f:18063413@us-cdbr-iron-east-04.cleardb.net/heroku_03fc01bc4aafcb0?reconnect=true");
+
 $db = parse_url(getenv('CLEARDB_DATABASE_URL'));
 $db['dbname'] = ltrim($db['path'], '/');
 $dsn = "{$db['scheme']}:host={$db['host']};dbname={$db['dbname']};charset=utf8";
@@ -19,12 +21,12 @@ try {
 	$sql = 'SELECT * FROM desk where room = 1112';
 	$prepare = $db->prepare($sql);
 
-	echo '<pre>';
+	//echo '<pre>';
 	$prepare->execute();
 	$result = $prepare->fetchAll(PDO::FETCH_ASSOC);
-	print_r(h($result));
-	echo "\n";
-	echo '</pre>';
+	//print_r(h($result));
+	//echo "\n";
+	//echo '</pre>';
 
 } catch (PODException $e) {
 	echo "Error: " . h($e->getMessage());
