@@ -43,15 +43,19 @@ function h($var)
 ?>
 <div id="wrapper">
 <h1>試験教室　座席表</h1>
-	<nav>
-		<a href="#1112">1112教室</a>
-		<a href="#1111">1111教室</a>
-		<a href="#1110">1110教室</a>
-	</nav>
 	<?php
+	print "<nav>\n";
 	$roomAry = array(1112, 1111, 1110);
 	foreach($roomAry as $room){
-		print $room;
+		print "\t\t<a href='#".$room."'>".$room."教室</a>\n";
+	}
+	print "\t</nav>\n";
+
+	foreach($roomAry as $room){
+		print "\t<div id='".$room."' class='room'>\n";
+		print "\t<div class='board'>スクリーン</div>\n";
+		print "\t<div class='pc' id='pc-".$room."'>教員PC</div>\n";
+		print "\t</div>\n";
 	}
 	?>
 	<div id="1112" class="room">
