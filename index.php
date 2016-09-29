@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-<head>
-<meta charset="utf-8">
-<link rel="stylesheet" type="text/css" href="./style.css">
-<script src="//code.jquery.com/jquery-3.1.0.js"></script>
-</head>
-
-<body>
 <?php
+$roomAry = [1112, 1111, 1110];
+$deskline = [			//1列の長さ
+	1112 => [5, 7, 7],
+	1111 => [5, 7, 6],
+	1110 => [5, 7, 7],
+];
+
 $db = parse_url(getenv('CLEARDB_DATABASE_URL'));
 $db['dbname'] = ltrim($db['path'], '/');
 $dsn = "{$db['scheme']}:host={$db['host']};dbname={$db['dbname']};charset=utf8";
@@ -19,12 +18,9 @@ try {
 	$sql = 'SELECT * FROM desk where room = 1112';
 	$prepare = $db->prepare($sql);
 
-	echo '<pre>';
 	$prepare->execute();
 	$result = $prepare->fetchAll(PDO::FETCH_ASSOC);
-	print_r(h($result));
-	echo "\n";
-	echo '</pre>';
+	//print_r(h($result));
 
 } catch (PODException $e) {
 	echo "Error: " . h($e->getMessage());
@@ -39,95 +35,68 @@ function h($var)
     }
 }
 ?>
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="./style.css">
+<script src="//code.jquery.com/jquery-3.1.0.js"></script>
+</head>
+
+<body>
 <div id="wrapper">
 <h1>試験教室　座席表</h1>
 	<nav>
-		<a href="#1112">1112教室</a>
-		<a href="#1111">1111教室</a>
-		<a href="#1110">1110教室</a>
+	<?php foreach($roomAry as $room): ?>
+		<a href="#<?=h($room)?>"><?=h($room)?>教室</a>
+	<?php endforeach; ?>
 	</nav>
-	<div id="1112" class="room">
-	<div class="board">スクリーン</div>
-	<div class="pc" id="pc-1112">教員PC</div>
-		<div class="desk-area">
+
+	<?php foreach($roomAry as $room): ?>
+	<div id="<?=h($room)?>" class="room">
+		<div class='board'>スクリーン</div>
+		<div class='pc'>教員PC</div>
+
+			<div class='desk-area'>
 			<?php
-			for($i=1; $i<=38; $i++){
-				if($i == 1 || $i == 11 || $i == 25){	//the number of the upper left desk
-					echo "<div class='desk-block desk-right'>\n", "\t<div class='column right'>\n";
-				}
-				if($i == 6 || $i == 18 || $i == 32) {	//the number of the upper right desk
-					echo "\t</div>\n", "\t<div class='column left'>\n";
-				}
-
-				$stat = (h($result[$i-1]['status']) == 0) ? "" : ' style="background-color: yellow"' ;
-					echo "\t\t<div class='cell'".$stat.">".$i."</a></div>\n";
-
-				if($i == 10 || $i == 24 || $i == 38){	//the number of the lower left desk
-					echo "\t</div>\n", "</div>\n";
-				}
-			}
+				$fstL = $deskline[$room][0];
+				$secL = $deskline[$room][1];
+				$thdL = $deskline[$room][2];
 			?>
-		</div>
-		<div class="door-area door-area-right">
-			<div class="door wall door-right">前方ドア</div>
-			<div class="door door-right">後方ドア(※締切)</div>
-		</div>
-	</div>
-	<div id="1111" class="room">
-	<div class="board">スクリーン</div>
-	<div class = "pc" id="pc-1111">教員PC</div>
-		<div class="desk-area">
-			<?php
-			for($i=1; $i<=36; $i++){
-				if($i == 1 || $i == 11){
-					echo "<div class='desk-block desk-right'>\n", "\t<div class='column right'>\n";
-				} elseif ($i == 25){
-					echo "<div class='desk-block desk-right' id='desk-back'>\n", "\t<div class='column right'>\n";
-				}
-				if($i == 6 || $i == 18 || $i == 31){
-					echo "\t</div>\n", "\t<div class='column left'>\n";
-				}
+			<?php for($i = 1; $i<=($fstL+$secL+$thdL)*2; $i++):?>
+				<?php if($i == 1 || $i == 1+($fstL*2) || $i == 1+($fstL+$secL)*2):					//the number of the upper left desk ?>
 
-					echo "\t\t<div class='cell'>".$i."</div>\n";
+				<div class='desk-block desk-right'>
+					<div class='column right'>
+				<?php endif; ?>
 
-				if($i == 10 || $i == 24 || $i == 36){
-					echo "\t</div>\n", "</div>\n";
-				}
-			}
-			?>
-		</div>
-		<div class="door-area door-area-right">
-			<div class="door wall door-right">前方ドア(※締切)</div>
-			<div class="door door-right">後方ドア</div>
-		</div>
-	</div>
+				<?php if($i == 1+$fstL || $i == 1+($fstL*2)+$secL || $i == 1+(($fstL+$secL)*2)+$thdL):	 		//the number of the upper right desk ?>
 
-	<div id="1110" class="room">
-	<div class="board">スクリーン</div>
-	<div class="pc" id="pc-1110">教員PC</div>
-		<div class="door-area door-area-left">
-			<div class="door wall door-left">前方ドア</div>
-			<div class="door door-left">後方ドア(※締切)</div>
-		</div>
-		<div class="desk-area door-right">
-			<?php
-			for($i=1; $i<=38; $i++){
-				if($i == 1 || $i == 11 || $i == 25){
-					echo "<div class='desk-block desk-left'>\n", "\t<div class='column left'>\n";
-				}
-				if($i == 6 || $i == 18 || $i == 32){
-					echo "\t</div>\n", "\t<div class='column right'>\n";
-				}
+					</div>
+					<div class='column left'>
 
-					echo "\t\t<div class='cell'>".$i."</div>\n";
+				<?php endif; ?>
+				<?php $stat = (h($result[$i-1]['status']) == 0) ? "" : 'style="background-color: yellow"' ; ?>
 
-				if($i == 10 || $i == 24 || $i == 38){
-					echo "\t</div>\n", "</div>\n";
-				}
-			}
-			?>
+							<div class="cell" ><?=$i?></a></div>
+
+				<?php if($i == $fstL*2 || $i == ($fstL+$secL)*2 || $i == ($fstL+$secL+$thdL)*2):			//the number of the lower left desk ?>
+
+					</div>
+				</div>
+
+				<?php endif; ?>
+			<?php endfor; ?>
+			</div>
+
+			<?php $dr = h($room) == 1110 ? "door-left" : "door-right" ?>
+			
+			<div class="door-area <?=h($room==1110) ? "door-area-left" : "door-area-right" ?>">
+				<div class="door wall <?=$dr?>">前方ドア<?=(h($room) == 1111) ? "(※締切)" : "" ?></div>
+				<div class="door <?=$dr?>">後方ドア<?=(h($room) != 1111) ? "(※締切)" : "" ?></div>
+			</div>
 		</div>
-	</div>
+
+	<?php endforeach; ?>
 	<div id="modal" class="is-hide">
 		<div id="modal-comment"></div>
 		<button type="submit" id="submit">OK</button> <button id="modal-close">Cancel</button> 
