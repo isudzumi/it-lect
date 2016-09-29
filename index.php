@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<head>
-<meta charset="utf-8">
-<link rel="stylesheet" type="text/css" href="./style.css">
-<script src="//code.jquery.com/jquery-3.1.0.js"></script>
-</head>
-
-<body>
 <?php
+$roomAry = [1112, 1111, 1110];
 putenv("CLEARDB_DATABASE_URL=mysql://be39339f7ce21f:18063413@us-cdbr-iron-east-04.cleardb.net/heroku_03fc01bc4aafcb0?reconnect=true");
 
 $db = parse_url(getenv('CLEARDB_DATABASE_URL'));
@@ -21,12 +14,9 @@ try {
 	$sql = 'SELECT * FROM desk where room = 1112';
 	$prepare = $db->prepare($sql);
 
-	//echo '<pre>';
 	$prepare->execute();
 	$result = $prepare->fetchAll(PDO::FETCH_ASSOC);
 	//print_r(h($result));
-	//echo "\n";
-	//echo '</pre>';
 
 } catch (PODException $e) {
 	echo "Error: " . h($e->getMessage());
@@ -41,23 +31,40 @@ function h($var)
     }
 }
 ?>
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="./style.css">
+<script src="//code.jquery.com/jquery-3.1.0.js"></script>
+</head>
+
+<body>
 <div id="wrapper">
 <h1>試験教室　座席表</h1>
-	<?php
-	print "<nav>\n";
-	$roomAry = array(1112, 1111, 1110);
-	foreach($roomAry as $room){
-		print "\t\t<a href='#".$room."'>".$room."教室</a>\n";
-	}
-	print "\t</nav>\n";
+	<nav>
+	<?php foreach($roomAry as $room): ?>
+		<a href="#<?=h($room)?>"><?=h($room)?>教室</a>
+	<?php endforeach; ?>
+	</nav>
 
-	foreach($roomAry as $room){
-		print "\t<div id='".$room."' class='room'>\n";
-		print "\t<div class='board'>スクリーン</div>\n";
-		print "\t<div class='pc' id='pc-".$room."'>教員PC</div>\n";
-		print "\t</div>\n";
-	}
-	?>
+	<?php foreach($roomAry as $room): ?>
+	<div id="<?=h($room)?>" class="room">
+		<div class='board'>スクリーン</div>
+		<div class='pc'>教員PC</div>
+
+			<div class='desk-area'>
+			</div>
+
+			<?php $dr = h($room) == 1110 ? "door-left" : "door-right" ?>
+			
+			<div class="door-area <?=h($room==1110) ? "door-area-left" : "door-area-right" ?>">
+				<div class="door wall <?=$dr?>">前方ドア<?=(h($room) == 1111) ? "(※締切)" : "" ?></div>
+				<div class="door <?=$dr?>">後方ドア<?=(h($room) != 1111) ? "(※締切)" : "" ?></div>
+			</div>
+		</div>
+
+	<?php endforeach; ?>
+
 	<div id="1112" class="room">
 	<div class="board">スクリーン</div>
 	<div class="pc" id="pc-1112">教員PC</div>
