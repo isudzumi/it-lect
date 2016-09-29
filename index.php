@@ -1,6 +1,5 @@
 <?php
 $roomAry = [1112, 1111, 1110];
-putenv("CLEARDB_DATABASE_URL=mysql://be39339f7ce21f:18063413@us-cdbr-iron-east-04.cleardb.net/heroku_03fc01bc4aafcb0?reconnect=true");
 
 $db = parse_url(getenv('CLEARDB_DATABASE_URL'));
 $db['dbname'] = ltrim($db['path'], '/');
