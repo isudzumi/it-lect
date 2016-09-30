@@ -1,11 +1,9 @@
 <?php
-$roomAry = [1112, 1111, 1110];
-$deskline = [			//1列の長さ
+$deskline = [			//机の縦1列の長さ
 	1112 => [5, 7, 7],
 	1111 => [5, 7, 6],
 	1110 => [5, 7, 7],
 ];
-
 $db = parse_url(getenv('CLEARDB_DATABASE_URL'));
 $db['dbname'] = ltrim($db['path'], '/');
 $dsn = "{$db['scheme']}:host={$db['host']};dbname={$db['dbname']};charset=utf8";
@@ -46,29 +44,30 @@ function h($var)
 <div id="wrapper">
 <h1>試験教室　座席表</h1>
 	<nav>
-	<?php foreach($roomAry as $room): ?>
+	<?php foreach($deskline as $room => $desk): ?>
 		<a href="#<?=h($room)?>"><?=h($room)?>教室</a>
 	<?php endforeach; ?>
 	</nav>
 
-	<?php foreach($roomAry as $room): ?>
+	<?php foreach($deskline as $room => $desk): ?>
 	<div id="<?=h($room)?>" class="room">
 		<div class="board">スクリーン</div>
 		<div id="pc-<?=h($room)?>" class="pc">教員PC</div>
 
 			<div class='desk-area'>
 			<?php
-				$fstL = $deskline[$room][0];
-				$secL = $deskline[$room][1];
-				$thdL = $deskline[$room][2];
+				$lineAry = [];
+				foreach($desk as $value){
+					array_push($lineAry, $value);
+				}
 			?>
-			<?php for($i = 1; $i<=($fstL+$secL+$thdL)*2; $i++):?>
-				<?php if($i == 1 || $i == 1+($fstL*2) || $i == 1+($fstL+$secL)*2):					//the number of the upper left desk ?>
+			<?php for($i = 1; $i<=($lineAry[0]+$lineAry[1]+$lineAry[2])*2; $i++):?>
+				<?php if($i == 1 || $i == 1+($lineAry[0]*2) || $i == 1+($lineAry[0]+$lineAry[1])*2):					//the number of the upper left desk ?>
 
 				<div class='desk-block desk-right'>
 					<div class='column right'>
 				<?php endif; ?>
-				<?php if($i == 1+$fstL || $i == 1+($fstL*2)+$secL || $i == 1+(($fstL+$secL)*2)+$thdL):	 		//the number of the upper right desk ?>
+				<?php if($i == 1+$lineAry[0] || $i == 1+($lineAry[0]*2)+$lineAry[1] || $i == 1+(($lineAry[0]+$lineAry[1])*2)+$lineAry[2]):	 		//the number of the upper right desk ?>
 
 					</div>
 					<div class='column left'>
@@ -76,7 +75,7 @@ function h($var)
 				<?php $stat = (h($result[$i-1]['status']) == 0) ? "" : 'style="background-color: yellow"' ; ?>
 
 							<div class="cell" ><?=$i?></div>
-				<?php if($i == $fstL*2 || $i == ($fstL+$secL)*2 || $i == ($fstL+$secL+$thdL)*2):			//the number of the lower left desk ?>
+				<?php if($i == $lineAry[0]*2 || $i == ($lineAry[0]+$lineAry[1])*2 || $i == ($lineAry[0]+$lineAry[1]+$lineAry[2])*2):			//the number of the lower left desk ?>
 
 					</div>
 				</div>
