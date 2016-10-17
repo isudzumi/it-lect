@@ -18,10 +18,12 @@ try {
 
 	$prepare->execute();
 	$result = $prepare->fetchAll(PDO::FETCH_ASSOC);
-	//print_r(h($result));
+
+	echo json_encode($result);
 
 } catch (PODException $e) {
-	echo "Error: " . h($e->getMessage());
+	$iserr = TRUE;
+       	echo "Error: ". h($e->getMessage());
 }
 
 function h($var)
@@ -56,6 +58,7 @@ function h($var)
 
 			<div class='desk-area'>
 			<?php
+				//机の列の配列を作る
 				$lineAry = [];
 				foreach($desk as $value){
 					array_push($lineAry, $value);
@@ -67,7 +70,7 @@ function h($var)
 				<div class='desk-block desk-right'>
 					<div class='column right'>
 				<?php endif; ?>
-				<?php if($i == 1+$lineAry[0] || $i == 1+($lineAry[0]*2)+$lineAry[1] || $i == 1+(($lineAry[0]+$lineAry[1])*2)+$lineAry[2]):	 		//the number of the upper right desk ?>
+				<?php if($i == 1+$lineAry[0] || $i == 1+($lineAry[0]*2)+$lineAry[1] || $i == 1+(($lineAry[0]+$lineAry[1])*2)+$lineAry[2]):	//the number of the upper right desk ?>
 
 					</div>
 					<div class='column left'>
@@ -131,8 +134,14 @@ function h($var)
 				if( idName == "modal-overlay" || idName == "modal-close" ){
 					fadeout();
 				}else if( idName == "submit" ){
+					var data = {
+						"room": c.parents(".room").attr("id"),
+						"desk": c.html(),
+						"status":(action == "toUsing") ? 1 : 0 
+					};
 					var color = (action == "toUsing") ? "yellow" : "" ;
 					c.css("background-color", color);
+					setstatus(data);
 					fadeout();
 				}
 				});
@@ -143,9 +152,11 @@ function h($var)
 					$("#modal-overlay, #comment").remove();
 				});
 			}
+
+			function setstatus(data){
+				$.post(
+					'post.php',
+					data
+				);
+			}
 </script>
-
-<?php
-			$updatesql = "update desk set status = 1";
-?>
-
