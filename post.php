@@ -11,7 +11,12 @@ try {
 
 	$sql = "UPDATE desk SET status = {$post['status']} WHERE room = {$post['room']} AND desk = {$post['desk']}";
 	$prepare = $db->prepare($sql);
-	$prepare->execute();
+	try {
+		$prepare->execute();
+	} catch (PDOException $e){
+		$prepare->rollback();
+		throw $e;
+	}
 
 } catch (PODException $e) {
 	$iserr = TRUE;
