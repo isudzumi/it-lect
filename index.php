@@ -7,23 +7,30 @@ $deskline = [			//机の縦1列の長さ
 $db = parse_url(getenv('CLEARDB_DATABASE_URL'));
 $db['dbname'] = ltrim($db['path'], '/');
 $dsn = "{$db['scheme']}:host={$db['host']};dbname={$db['dbname']};charset=utf8";
+$db = new PDO($dsn, $db['user'], $db['pass']);
+$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+$statAry = [];			//['教室番号']=>['机番号']=>'status( 0 or 1 )'
 try {
-	$db = new PDO($dsn, $db['user'], $db['pass']);
-	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-	$sql = 'SELECT * FROM desk where room = 1112';
+	$sql = "SELECT room, desk, status FROM desk";
 	$prepare = $db->prepare($sql);
 
 	$prepare->execute();
 	$result = $prepare->fetchAll(PDO::FETCH_ASSOC);
 
-	echo json_encode($result);
-
+	//$resultに格納された配列を、教室番号と机番号をキーにした2次元配列に書き換える
+	for($i = 0; $i < count($result); $i++){
+		if($i != 0 && $result[$i]['room'] == $result[$i-1]['room']){
+			$statAry[$result[$i]['room']][$result[$i]['desk']] = $result[$i]['status'];
+		} else {
+			$statAry += [$result[$i]['room'] => [$result[$i]['desk'] => $result[$i]['status']]];
+		}
+	}
+	
 } catch (PODException $e) {
 	$iserr = TRUE;
-       	echo "Error: ". h($e->getMessage());
+	echo "Error: ". h($e->getMessage());
 }
 
 function h($var)
@@ -65,7 +72,7 @@ function h($var)
 				}
 			?>
 			<?php for($i = 1; $i<=($lineAry[0]+$lineAry[1]+$lineAry[2])*2; $i++):?>
-				<?php if($i == 1 || $i == 1+($lineAry[0]*2) || $i == 1+($lineAry[0]+$lineAry[1])*2):					//the number of the upper left desk ?>
+				<?php if($i == 1 || $i == 1+($lineAry[0]*2) || $i == 1+($lineAry[0]+$lineAry[1])*2):						//the number of the upper left desk ?>
 
 				<div class='desk-block desk-right'>
 					<div class='column right'>
@@ -75,10 +82,10 @@ function h($var)
 					</div>
 					<div class='column left'>
 				<?php endif; ?>
-				<?php $stat = (h($result[$i-1]['status']) == 0) ? "" : 'style="background-color: yellow"' ; ?>
+				<?php $stat = ($statAry["$room"]["$i"] == 1) ? ' style="background-color: yellow"' : "" ; ?>
 
-							<div class="cell" ><?=$i?></div>
-				<?php if($i == $lineAry[0]*2 || $i == ($lineAry[0]+$lineAry[1])*2 || $i == ($lineAry[0]+$lineAry[1]+$lineAry[2])*2):			//the number of the lower left desk ?>
+							<div class="cell"<?=$stat?>><?=$i?></div>
+				<?php if($i == $lineAry[0]*2 || $i == ($lineAry[0]+$lineAry[1])*2 || $i == ($lineAry[0]+$lineAry[1]+$lineAry[2])*2):		//the number of the lower left desk ?>
 
 					</div>
 				</div>
