@@ -5,7 +5,7 @@ $deskline = [			//机の縦1列の長さ
 	1110 => [5, 7, 7],
 ];
 
-requre_once("get.php");
+require_once("get.php");
 
 function h($var)
 {
