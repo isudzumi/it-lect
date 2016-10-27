@@ -62,8 +62,15 @@ function h($var)
 	<div id="<?=h($room)?>" class="room">
 		<div class="board">スクリーン</div>
 		<div id="pc-<?=h($room)?>" class="pc">教員PC</div>
+		<?php if($room == 1110): ?>
+			
+			<div class="door-area door-area-left">
+				<div class="door wall door-left">前方ドア<?=(h($room) == 1111) ? "(※締切)" : "" ?></div>
+				<div class="door door-left">後方ドア<?=(h($room) != 1111) ? "(※締切)" : "" ?></div>
+			</div>
+		<?php endif; ?>
 
-			<div class='desk-area'>
+		<div class="desk-area" id="desk-<?=h($room)?>">
 			<?php
 				//机の列の配列を作る
 				$lineAry = [];
@@ -75,12 +82,12 @@ function h($var)
 				<?php if($i == 1 || $i == 1+($lineAry[0]*2) || $i == 1+($lineAry[0]+$lineAry[1])*2):						//the number of the upper left desk ?>
 
 				<div class='desk-block desk-right'>
-					<div class='column right'>
+				<div class="column <?=($room != 1110) ? 'right' : 'left'?>">
 				<?php endif; ?>
 				<?php if($i == 1+$lineAry[0] || $i == 1+($lineAry[0]*2)+$lineAry[1] || $i == 1+(($lineAry[0]+$lineAry[1])*2)+$lineAry[2]):	//the number of the upper right desk ?>
 
 					</div>
-					<div class='column left'>
+					<div class="column <?=($room != 1110) ? 'left' : 'right'?>">
 				<?php endif; ?>
 				<?php $stat = ($statAry["$room"]["$i"] == 1) ? ' style="background-color: yellow"' : "" ; ?>
 
@@ -92,13 +99,13 @@ function h($var)
 				<?php endif; ?>
 			<?php endfor; ?>
 			</div>
-
-			<?php $dr = h($room) == 1110 ? "door-left" : "door-right" ?>
+			<?php if($room != 1110): ?>
 			
-			<div class="door-area <?=h($room==1110) ? "door-area-left" : "door-area-right" ?>">
-				<div class="door wall <?=$dr?>">前方ドア<?=(h($room) == 1111) ? "(※締切)" : "" ?></div>
-				<div class="door <?=$dr?>">後方ドア<?=(h($room) != 1111) ? "(※締切)" : "" ?></div>
+			<div class="door-area door-area-right">
+				<div class="door wall door-right">前方ドア<?=(h($room) == 1111) ? "(※締切)" : "" ?></div>
+				<div class="door door-right">後方ドア<?=(h($room) != 1111) ? "(※締切)" : "" ?></div>
 			</div>
+			<?php endif; ?>
 		</div>
 
 	<?php endforeach; ?>

@@ -36,6 +36,10 @@ a:hover{
 	display: block;
 }
 
+#desk-1110.room-area {
+	flex-direction:row-reverse;
+}
+
 .board {
 	width: 60%;
 	height:18px;
@@ -47,16 +51,6 @@ a:hover{
 	border: 2px solid black;
 	font-size: 16px;
 	line-height:18px;
-}
-
-.desk-area {
-	width: 95%;
-	margin-right:auto;
-	float: left;
-}
-
-.desk-right {
-	float: right;
 }
 
 .door-area {
@@ -76,6 +70,7 @@ a:hover{
 .door {
 	width: 18px;
 	height: 20%;
+	min-height:120px;
 	text-align: center;
 	vertical-align:middle;
 	line-height:18px;
@@ -83,9 +78,9 @@ a:hover{
 	background-color: lightgray;
 	font-size:16px;
 	border: 2px solid black;
-	writing-mode: tb-rl;			//IE—p
+	writing-mode: tb-rl;			//IEç”¨
 	writing-mode: vertical-rl;
-	-webkit-writing-mode: vertical-rl;	//Safari—p
+	-webkit-writing-mode: vertical-rl;	//Safariç”¨
 }
 
 .wall {
@@ -124,11 +119,26 @@ a:hover{
 	margin: 10px 3% 0 auto;
 }
 
+.desk-area {
+	width: 95%;
+	margin-right:auto;
+	float: left;
+	display:flex;
+	display:-webkit-flex;
+	flex-direction:row-reverse;
+}
+
+#desk-1110{
+	flex-direction:row;
+}
+
+.desk-right {
+	float: right;
+}
+
 .column {
 	margin: 10px 0;
 	width : 44%;
-	display:flex;
-	display:-webkit-flex;
 	flex-direction: column;
 	flex-wrap     : nowrap;
 }
@@ -137,13 +147,11 @@ a:hover{
 	width : 33%;
 }
 
-div.desk-block:nth-of-type(6) {
-	margin-top:122px;
+#desk-1110.desk-area {
+	flex-direction:row;
 }
 
 .desk-right {
-	display:flex;
-	display:-webkit-flex;
 	flex-direction: row-reverse;
 	flex-wrap     : nowrap;
 	flex-grow     : 1 ;
@@ -151,8 +159,6 @@ div.desk-block:nth-of-type(6) {
 }
 
 .desk-left {
-	display:flex;
-	display:-webkit-flex;
 	flex-direction: row;
 	flex-wrap     : nowrap;
 	flex-grow     : 1 ;
