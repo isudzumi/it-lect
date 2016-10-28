@@ -123,14 +123,13 @@ function h($var)
 					fadeout();
 				}else if( idName == "submit" ){
 					var data = {
-						"room": c.parents(".room").attr("id"),
-						"desk": c.html(),
-						"status":(action == "toUsing") ? 1 : 0 
+						"room":c.parents(".room").attr("id"),
+						"desk":c.html(),
+						"status":(action == "toUsing") ? 1 : 0
 					};
-					var color = (action == "toUsing") ? "yellow" : "" ;
-					c.css("background-color", color);
-					setstatus(data);
+					setstatus(data, c);
 					fadeout();
+					c.css("background-color", (action == "toUsing") ? "yellow" : "");
 				}
 				});
 			}
@@ -141,10 +140,23 @@ function h($var)
 				});
 			}
 
-			function setstatus(data){
-				$.post(
-					'post.php',
-					data
-				);
+			function setstatus(data, c){
+				$.ajax({
+					type:'POST',
+					url :'post.php',
+					dataType:'text',
+					data:data,
+					timeout:10000,
+					beforeSend:function(){
+						$("#submit").attr('disabled', true);
+						$("#submit").css("background-color", "lightgray");
+					}
+				}).fail(function(xhr, ts, err){
+					c.css("background-color", data["status"]==1 ? "" : "yellow");
+					alert("Fail : "+ts+", "+err.massage);
+				}).always(function(){
+					$("#submit").attr('disabled', false);
+					$("#submit").css("background-color", "lightgreen");
+				});
 			}
 </script>
