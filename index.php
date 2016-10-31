@@ -136,7 +136,7 @@ require_once("get.php");
 					fadeout();
 				}else if( idName == "submit" ){
 					var data = {
-						"room":c.parents(".room").attr("id"),
+						"room":c.parents(".mdl-layout__tab-panel.is-active").attr("id").substring(4),
 						"desk":c.html(),
 						"status":(action == "toUsing") ? 1 : 0
 					};
