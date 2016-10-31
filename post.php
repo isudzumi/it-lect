@@ -1,4 +1,9 @@
 <?php
+
+$request = isset($_SERVER['HTTP_X_REQUESTED_WITH']) ? strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) : "";
+if($request !== 'xmlhttprequest')
+	exit;
+
 $db = parse_url(getenv('CLEARDB_DATABASE_URL'));
 $db['dbname'] = ltrim($db['path'], '/');
 $dsn = "{$db['scheme']}:host={$db['host']};dbname={$db['dbname']};charset=utf8";

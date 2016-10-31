@@ -7,44 +7,53 @@ $deskline = [			//机の縦1列の長さ
 
 require_once("get.php");
 
-function h($var)
-{
-    if (is_array($var)) {
-	return array_map('h', $var);
-    } else {
-	return htmlspecialchars($var, ENT_QUOTES, 'UTF-8');
-    }
-}
 ?>
 <!DOCTYPE html>
 <head>
 <meta charset="utf-8">
+<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="//code.getmdl.io/1.1.3/material.green-light_green.min.css" />
 <link rel="stylesheet" type="text/css" href="./style.css">
+<script defer src="//code.getmdl.io/1.1.3/material.min.js"></script>
 <script src="//code.jquery.com/jquery-3.1.0.js"></script>
 </head>
 
 <body>
-<div id="wrapper">
-<h1>試験教室　座席表</h1>
-	<nav>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+<header class="mdl-layout__header">
+	<div class="mdl-layout__header-row">
+		<span class="mdl-layout-title"><h3>試験教室 座席表</h3></span>
+	</div>
+	<div class="mdl-layout__tab-bar mdl-js-ripple-effect">
 	<?php foreach($deskline as $room => $desk): ?>
-		<a href="#<?=h($room)?>"><?=h($room)?>教室</a>
+		<a href="#room<?=$room?>" class="mdl-layout__tab <?=($room)==1112 ? "is-active" : ""?>"><?=$room?>教室</a>
 	<?php endforeach; ?>
+	</div>
+</header>
+<div class="mdl-layout__drawer">
+	<span class="mdl-layout-title">試験教室</span>
+	<nav class="mdl-navigation">
+		<a class="mdl-navigation__link" href="https://docs.google.com/spreadsheets/d/1LDDefOWRvG-Tr6vlrqGLQe3mewMBNZQkcrOMANyJ-AU/edit?usp=sharing" target="_blank">IT-Aご意見帳</a>
+		<a class="mdl-navigation__link" href="https://docs.google.com/forms/d/e/1FAIpQLSfNPoLfWMFwKZkba3y50uMj-mLXa0JsZjK1OacPe3K8FyYolQ/viewform" target="_blank">IT講習会不正行為疑い事例報告フォーム</a>
+		<a class="mdl-navigation__link" href="https://github.com/isudzumi/it-lect-using-desk" target="_blank">開発元</a>
 	</nav>
+</div>
+<main class="mdl-layout__content">
 
 	<?php foreach($deskline as $room => $desk): ?>
-	<div id="<?=h($room)?>" class="room">
+	<section id="room<?=$room?>" class="mdl-layout__tab-panel <?=($room)==1112 ? "is-active" : ""?>">
+	<div class="room page__content">
 		<div class="board">スクリーン</div>
-		<div id="pc-<?=h($room)?>" class="pc">教員PC</div>
+		<div id="pc-<?=$room?>" class="pc">教員PC</div>
 		<?php if($room == 1110): ?>
 			
 			<div class="door-area door-area-left">
-				<div class="door wall door-left">前方ドア<?=(h($room) == 1111) ? "(※締切)" : "" ?></div>
-				<div class="door door-left">後方ドア<?=(h($room) != 1111) ? "(※締切)" : "" ?></div>
+				<div class="door wall door-left">前方ドア<?=($room == 1111) ? "(※締切)" : "" ?></div>
+				<div class="door door-left">後方ドア<?=($room != 1111) ? "(※締切)" : "" ?></div>
 			</div>
 		<?php endif; ?>
 
-		<div class="desk-area" id="desk-<?=h($room)?>">
+		<div class="desk-area" id="desk-<?=$room?>">
 			<?php
 				//机の列の配列を作る
 				$lineAry = [];
@@ -76,24 +85,28 @@ function h($var)
 			<?php if($room != 1110): ?>
 			
 			<div class="door-area door-area-right">
-				<div class="door wall door-right">前方ドア<?=(h($room) == 1111) ? "(※締切)" : "" ?></div>
-				<div class="door door-right">後方ドア<?=(h($room) != 1111) ? "(※締切)" : "" ?></div>
+				<div class="door wall door-right">前方ドア<?=($room == 1111) ? "(※締切)" : "" ?></div>
+				<div class="door door-right">後方ドア<?=($room != 1111) ? "(※締切)" : "" ?></div>
 			</div>
 			<?php endif; ?>
 		</div>
+		</section>
 
 	<?php endforeach; ?>
-	<div id="modal" class="is-hide">
-		<div id="modal-comment"></div>
-		<button type="submit" id="submit">OK</button> <button id="modal-close">Cancel</button> 
-	</div>
 
+</main>
 </div>
+<dialog id="modal" class="is-hide mdl-dialog">
+	<div class="mdl-dialog__title" id="modal-comment"></div>
+	<div class="mdl-dialog__actions">
+	<button type="submit" class="mdl-button mdl-js-button mdl-button--raised mld-js-ripple-effect mdl-button--colored" id="submit">OK</button> <button class="mdl-button" id="modal-close">Cancel</button> 
+	</div>
+</dialog>
 </body>
 
 <script>
 			$(function(){
-				$(".desk-block").eq(5).css("margin-top", "122px");
+				$(".desk-block").eq(5).css("margin-top", "calc(9vh + 32px)");
 			});
 
 			$(function(){
@@ -159,4 +172,5 @@ function h($var)
 					$("#submit").css("background-color", "lightgreen");
 				});
 			}
+
 </script>
