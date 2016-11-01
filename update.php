@@ -32,3 +32,4 @@ $diff = array_diff_assoc($result, $temp);
 $statAry = [];
 $statAry = sortAry($diff, $statAry);
 json_encode($statAry);
+
