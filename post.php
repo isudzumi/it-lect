@@ -8,16 +8,16 @@ if($request !== 'xmlhttprequest')
 if(isset($_POST)){
 
 	$post = $_POST;
+	$sql = "UPDATE desk SET status = {$post['status']} WHERE room = {$post['room']} AND desk = {$post['desk']}";
 
 	try {
 		$db = new ConnectDB();
-		$sql = "UPDATE desk SET status = {$post['status']} WHERE room = {$post['room']} AND desk = {$post['desk']}";
 		$prepare = $db->get($sql);
 		$prepare->execute();
 
-	} catch (PODException $e) {
+	} catch (PDOException $e) {
 		$prepare->rollback();
-		echo "Error: ". h($e->getMessage());
+		echo "Error: ". $e->getMessage();
 	}
 }
 
