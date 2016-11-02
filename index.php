@@ -131,10 +131,9 @@ require_once("get.php");
 				});
 			});
 
-			$(document).ready(function(){
+			$(function(){
 				$("#reset").click(function(e){
 					var room = { "room":$(".mdl-layout__tab.is-active").attr("href").substring(5) };
-					e.preventDefault();
 					$.ajax({
 						type:'POST',
 						url :'reset.php',
@@ -156,7 +155,7 @@ require_once("get.php");
 					}).always(function(){
 						$("#reset").attr('disabled', false);
 						$("#reset").css("background-color", "white");
-					}).abort();
+					});
 				});
 			});
 
