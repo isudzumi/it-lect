@@ -32,6 +32,37 @@ h3 {
 	min-width:720px;
 }
 
+#option {
+	margin : 20px 56px 0 calc(100% - 200px);
+	z-index: 2;
+	position: absolute;
+}
+
+#reset {
+	background-color:white;
+	color:green;
+	font-weight: bold;
+}
+
+#toggle {
+	margin-bottom: 20px;
+}
+
+.mdl-switch__track {
+	background-color: rgba(255, 255, 255, 0.6);
+}
+.mdl-switch.is-checked .mdl-switch__track {
+	background-color: green;
+}
+
+.mdl-switch.is-checked .mdl-switch__thumb {
+	background-color: #003300;
+}
+
+#sync {
+	margin-left: auto;
+}
+
 #desk-1110.room-area {
 	flex-direction:row-reverse;
 }

@@ -29,6 +29,13 @@ require_once("get.php");
 		<a href="#room<?=$room?>" class="mdl-layout__tab <?=($room)==1112 ? "is-active" : ""?>"><?=$room?>教室</a>
 	<?php endforeach; ?>
 	</div>
+	<div id="option">
+		<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="sync" id="toggle">
+			<input type="checkbox" id="sync" class="mdl-switch__input">
+			<span class="mdl-swich__label"></span>
+		</label>
+		<button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="reset">Reset</button>
+	</div>
 </header>
 <div class="mdl-layout__drawer">
 	<span class="mdl-layout-title">試験教室</span>
@@ -105,9 +112,7 @@ require_once("get.php");
 </body>
 
 <script>
-			$(function(){
-				$(".desk-block").eq(5).css("margin-top", "calc(9vh + 32px)");
-			});
+			$(".desk-block").eq(5).css("margin-top", "calc(9vh + 32px)");
 
 			$(function(){
 				$(".cell").click(function(){
@@ -123,6 +128,35 @@ require_once("get.php");
 						fade();
 					}
 					delete c;
+				});
+			});
+
+			$(document).ready(function(){
+				$("#reset").click(function(e){
+					var room = { "room":$(".mdl-layout__tab.is-active").attr("href").substring(5) };
+					e.preventDefault();
+					$.ajax({
+						type:'POST',
+						url :'reset.php',
+						data: room,
+						dataType:'text',
+						cache:false,
+						timeout:10000,
+						beforeSend:function(){
+							$("#reset").attr('disabled', true);
+							$("#reset").css("background-color", "lightgreen");
+						}
+					}).done(function(data){
+						console.log(data);
+					}).fail(function(xhr, ts, err){
+						console.log(xhr.status);
+						console.log(xhr.readyState);
+						console.log(ts);
+						console.log(err.message);
+					}).always(function(){
+						$("#reset").attr('disabled', false);
+						$("#reset").css("background-color", "white");
+					}).abort();
 				});
 			});
 
