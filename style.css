@@ -29,13 +29,13 @@ h3 {
 .room{
 	height: 100vh;
 	padding 32px;
-	min-width:720px;
 }
 
 #option {
 	margin : 20px 56px 0 calc(100% - 200px);
-	z-index: 2;
+	z-index: 0;
 	position: absolute;
+	display: none;
 }
 
 #reset {
@@ -226,13 +226,15 @@ h3 {
 	width :100%;
 	height:120%;
 	background:rgba(0,0,0,0.8);
-	z-index:3;
+	z-index:4;
 }
 
 #modal {
 	position:fixed;
 	text-align:center;
-	z-index:4;
+	z-index:5;
+	background-color: white;
+	margin: 0 auto;
 }
 
 
@@ -247,67 +249,7 @@ button {
 	display:none;
 }
 
-@media screen and (max-width:480px) {
-
-main {
-	padding-top : 50px;
-}
-
-#modal {
-	top:40vh;
-	width :90vw;
-}
-
-.mdl-button {
-	height: 3vh;
-	font-size: 2vh;
-}
-
-}
-
-@media screen and (min-width:480px) and (max-width:768px){
-
-main {
-	padding-top : 50px;
-}
-
-#modal {
-	top:40vh;
-	width :80vw;
-}
-
-.mdl-button {
-	height: 3vh;
-	font-size: 2vh;
-}
-
-}
-
-@media screen and (min-width:768px) and (max-width:980px) {
-
-main {
-	max-width:980px;
-}
-
-#modal {
-	top:40vh;
-	width :60vw;
-}
-
-#comment {
-	height:10vh;
-	line-height:10vh;
-	font-size:30px;
-}
-
-.mdl-button {
-	height: 3vh;
-	font-size: 2vh;
-}
-
-}
-
-@media screen and (min-width:980px) {
+@media  (max-width: 4000px) {
 
 main {
 	max-width:980px;
@@ -323,3 +265,40 @@ main {
 }
 
 }
+
+@media  (max-width: 980px){
+
+main {
+	max-width:100%;
+}
+
+#modal {
+	top:40vh;
+	width :60vw;
+}
+
+#comment {
+	height:10vh;
+	line-height:10vh;
+	font-size:25px;
+}
+
+}
+
+@media  (max-width:480px){
+
+main {
+	padding-top : 50px;
+}
+
+#modal {
+	top:40vh;
+	width :90vw;
+}
+
+#comment {
+	font-size: 18px;
+}
+
+}
+

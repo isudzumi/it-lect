@@ -11,6 +11,7 @@ require_once("get.php");
 <!DOCTYPE html>
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="//code.getmdl.io/1.1.3/material.green-light_green.min.css" />
 <link rel="stylesheet" type="text/css" href="./style.css">
