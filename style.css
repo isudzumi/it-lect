@@ -153,12 +153,15 @@ h3 {
 	width: 95%;
 	margin-right:auto;
 	float: left;
-	display:flex;
+	display:-webkit-box;
 	display:-webkit-flex;
+	display:flex;
+	-webkit-flex-direction:row-reverse;
 	flex-direction:row-reverse;
 }
 
 #desk-1110{
+	-webkit-flex-direction:row;
 	flex-direction:row;
 }
 
@@ -169,6 +172,7 @@ h3 {
 .column {
 	margin: 10px 0;
 	width : 45%;
+	-webkit-flex-direction: column;
 	flex-direction: column;
 	flex-wrap     : nowrap;
 }
@@ -260,6 +264,7 @@ main {
 
 #modal {
 	top:40vh;
+	margin-left: calc(50% - 120px);
 }
 
 #comment {
