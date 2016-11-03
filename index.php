@@ -45,6 +45,7 @@ require_once("get.php");
 		<a class="mdl-navigation__link" href="https://docs.google.com/spreadsheets/d/1LDDefOWRvG-Tr6vlrqGLQe3mewMBNZQkcrOMANyJ-AU/edit?usp=sharing" target="_blank">IT-Aご意見帳</a>
 		<a class="mdl-navigation__link" href="https://docs.google.com/forms/d/e/1FAIpQLSfNPoLfWMFwKZkba3y50uMj-mLXa0JsZjK1OacPe3K8FyYolQ/viewform" target="_blank">IT講習会不正行為疑い事例報告フォーム</a>
 		<a class="mdl-navigation__link" href="https://github.com/isudzumi/it-lect-using-desk" target="_blank">開発元</a>
+		<a class="mdl-navigation__link">設定</a>
 	</nav>
 </div>
 <main class="mdl-layout__content">
@@ -108,7 +109,8 @@ require_once("get.php");
 <dialog id="modal" class="is-hide mdl-dialog">
 	<div class="mdl-dialog__title" id="modal-comment"></div>
 	<div class="mdl-dialog__actions">
-	<button type="submit" class="mdl-button mdl-js-button mdl-button--raised mld-js-ripple-effect mdl-button--colored" id="submit">OK</button> <button class="mdl-button" id="modal-close">Cancel</button> 
+	<button type="submit" class="mdl-button mdl-js-button mdl-button--raised mld-js-ripple-effect mdl-button--colored" id="submit">OK</button>
+	<button class="mdl-button" id="modal-close">Cancel</button> 
 	</div>
 </dialog>
 </body>
