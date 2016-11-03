@@ -151,12 +151,14 @@ h3 {
 	width: 95%;
 	margin-right:auto;
 	float: left;
-	display:flex;
 	display:-webkit-flex;
+	display:flex;
+	-webkit-flex-direction:row-reverse;
 	flex-direction:row-reverse;
 }
 
 #desk-1110{
+	-webkit-flex-direction:row;
 	flex-direction:row;
 }
 
@@ -167,7 +169,9 @@ h3 {
 .column {
 	margin: 10px 0;
 	width : 45%;
+	-webkit-flex-direction: column;
 	flex-direction: column;
+	-webkit-flex-wrap     : nowrap;
 	flex-wrap     : nowrap;
 }
 
@@ -180,6 +184,7 @@ h3 {
 }
 
 .desk-right {
+	-webkit-flex-direction: row-reverse;
 	flex-direction: row-reverse;
 	flex-wrap     : nowrap;
 	flex-grow     : 1 ;
