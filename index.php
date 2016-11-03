@@ -15,9 +15,11 @@ require_once("get.php");
 <title>試験教室 座席表</title>
 <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="//code.getmdl.io/1.1.3/material.green-light_green.min.css" />
-<link rel="stylesheet" type="text/css" href="./style.css">
+<link rel="stylesheet" type="text/css" href="./style/style.css">
+<link rel="stylesheet" type="text/css" href="./style/swiper.min.css">
 <script defer src="//code.getmdl.io/1.1.3/material.min.js"></script>
 <script src="//code.jquery.com/jquery-3.1.0.js"></script>
+<script src="./script/swiper.min.js"></script>
 </head>
 
 <body>
@@ -48,10 +50,10 @@ require_once("get.php");
 		<a class="mdl-navigation__link">設定</a>
 	</nav>
 </div>
-<main class="mdl-layout__content">
+<main class="mdl-layout__content swiper-container swiper-wrapper">
 
 	<?php foreach($deskline as $room => $desk): ?>
-	<section id="room<?=$room?>" class="mdl-layout__tab-panel <?=($room)==1112 ? "is-active" : ""?>">
+	<section id="room<?=$room?>" class="mdl-layout__tab-panel <?=($room)==1112 ? "is-active" : ""?> swiper-slide">
 	<div class="room page__content">
 		<div class="board">スクリーン</div>
 		<div id="pc-<?=$room?>" class="pc">教員PC</div>
@@ -209,5 +211,10 @@ require_once("get.php");
 					$("#submit").css("background-color", "lightgreen");
 				});
 			}
+
+			// Swiper API setting
+			var swiper = new Swiper('.swiper-container', {
+				speed: 800;
+			});
 
 </script>
