@@ -163,6 +163,20 @@ require_once("get.php");
 				});
 			});
 
+			$(function(){
+				$.ajax({
+					type:'POST',
+					url :'update.php',
+				}).done(function(data){
+						console.log(data);
+				}).fail(function(xhr, ts, err){
+					console.log(xhr.status);
+					console.log(xhr.readyState);
+					console.log(ts);
+					console.log(err.message);
+				});
+			});
+
 			function modalAction(c, action){
 				var msg = (action == "toUsing") ? "使用中" : "空席" ;
 				$("#modal-comment").append("<p id='comment'>"+c.html()+"番の座席を"+msg+"にしますか？</p>");
