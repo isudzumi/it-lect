@@ -264,6 +264,7 @@ main {
 
 #modal {
 	top:40vh;
+	margin-left: calc(50% - 120px);
 }
 
 #comment {
