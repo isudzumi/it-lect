@@ -50,7 +50,8 @@ require_once("get.php");
 		<a class="mdl-navigation__link">設定</a>
 	</nav>
 </div>
-<main class="mdl-layout__content swiper-container swiper-wrapper">
+<main class="mdl-layout__content swiper-container swiper-container-vertical">
+<div class="swiper-wrapper">
 
 	<?php foreach($deskline as $room => $desk): ?>
 	<section id="room<?=$room?>" class="mdl-layout__tab-panel <?=($room)==1112 ? "is-active" : ""?> swiper-slide">
@@ -106,6 +107,7 @@ require_once("get.php");
 
 	<?php endforeach; ?>
 
+</div>
 </main>
 </div>
 <dialog id="modal" class="is-hide mdl-dialog">
@@ -156,6 +158,7 @@ require_once("get.php");
 					}).fail(function(xhr, ts, err){
 						console.log(xhr.status);
 						console.log(xhr.readyState);
+						console.log(xhr.responseText);
 						console.log(ts);
 						console.log(err.message);
 					}).always(function(){
@@ -174,6 +177,7 @@ require_once("get.php");
 				}).fail(function(xhr, ts, err){
 					console.log(xhr.status);
 					console.log(xhr.readyState);
+					console.log(xhr.responseText);
 					console.log(ts);
 					console.log(err.message);
 				});
@@ -227,8 +231,6 @@ require_once("get.php");
 			}
 
 			// Swiper API setting
-			var swiper = new Swiper('.swiper-container', {
-				speed: 800;
-			});
+			var swiper = new Swiper('.swiper-container');
 
 </script>
