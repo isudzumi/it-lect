@@ -141,7 +141,8 @@ require_once("get.php");
 
 			$(function(){
 				$("#reset").click(function(e){
-					var room = { "room":$(".mdl-layout__tab.is-active").attr("href").substring(5) };
+					var roomN= $(".mdl-layout__tab.is-active").attr("href").substring(5);
+					var room = { "room": roomN};
 					$.ajax({
 						type:'POST',
 						url :'reset.php',
@@ -154,7 +155,9 @@ require_once("get.php");
 							$("#reset").css("background-color", "lightgreen");
 						}
 					}).done(function(data){
-						console.log(data);
+						if(data == "success") {
+							$("#desk-"+roomN).find(".cell").css("background-color", "");
+						}
 					}).fail(function(xhr, ts, err){
 						console.log(xhr.status);
 						console.log(xhr.readyState);
