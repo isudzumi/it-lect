@@ -36,7 +36,6 @@ require_once("get.php");
 			<input type="checkbox" id="sync" class="mdl-switch__input">
 			<span class="mdl-swich__label"></span>
 		</label>
-		<button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="reset">Reset</button>
 	</div>
 </header>
 <div class="mdl-layout__drawer">
@@ -46,6 +45,7 @@ require_once("get.php");
 		<a class="mdl-navigation__link" href="https://docs.google.com/forms/d/e/1FAIpQLSfNPoLfWMFwKZkba3y50uMj-mLXa0JsZjK1OacPe3K8FyYolQ/viewform" target="_blank">IT講習会不正行為疑い事例報告フォーム</a>
 		<a class="mdl-navigation__link" href="https://github.com/isudzumi/it-lect-using-desk" target="_blank">開発元</a>
 		<a class="mdl-navigation__link">設定</a>
+		<button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="reset">Reset</button>
 	</nav>
 </div>
 <main class="mdl-layout__content">
@@ -185,22 +185,34 @@ require_once("get.php");
 
 			//画面スワイプ
 			$(function(){
-				$(".mdl-layout__tab-panel").on("touchstart", TouchStart);
-				$(".mdl-layout__tab-panel").on("touchmove", TouchMove);
+				var pos = $(".mdl-layout__tab-panel").on("touchstart", touchStart);
+				$(".mdl-layout__tab-panel").on("touchmove", function(e){
+					touchMove(e, pos);
+				});
 			});
 
-			function TouchStart(e) {
-				var pos = Position(e);
-				$(".mdl-layout__tab-panel").data("memory", pos.x);
+			function touchStart(e) {
+				var pos = position(e);
+				return pos;
 			}
 
-			function TouchMove(e) {
-				var pos = Position(e);
-				if(pos.x < $(".mdl-layout__tab-panel").data("memory")) {
-					console.log("move left");
-				} else {
-					console.log("move right");
+			function touchMove(e, startpos) {
+				var pos = position(e);
+				console.log(startpos);
+				if(startpos.x - pos.x > 70) {
+					console.log("right");
+				} else if (pos.x - startpos.x < -70) {
+					console.log("left");
 				}
+			}
+
+			function position(e) {
+				var x = e.originalEvent.touches[0].pageX;
+				var y = e.originalEvent.touches[0].pageY;
+				x = Math.floor(x);
+				y = Math.floor(y);
+				var pos = {'x':x, 'y':y};
+				return pos;
 			}
 
 			function modalAction(c, action){
