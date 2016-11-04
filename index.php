@@ -167,6 +167,7 @@ require_once("get.php");
 				});
 			});
 
+			//自動更新
 			$(function(){
 				$.ajax({
 					type:'POST',
@@ -181,6 +182,26 @@ require_once("get.php");
 					console.log(err.message);
 				});
 			});
+
+			//画面スワイプ
+			$(function(){
+				$(".mdl-layout__tab-panel").on("touchstart", TouchStart);
+				$(".mdl-layout__tab-panel").on("touchmove", TouchMove);
+			});
+
+			function TouchStart(e) {
+				var pos = Position(e);
+				$(".mdl-layout__tab-panel").data("memory", pos.x);
+			}
+
+			function TouchMove(e) {
+				var pos = Position(e);
+				if(pos.x < $(".mdl-layout__tab-panel").data("memory")) {
+					console.log("move left");
+				} else {
+					console.log("move right");
+				}
+			}
 
 			function modalAction(c, action){
 				var msg = (action == "toUsing") ? "使用中" : "空席" ;
