@@ -120,18 +120,23 @@ require_once("get.php");
 
 			$(function(){
 				$(".cell").click(function(){
-					$("body").append("<div id='modal-overlay'></div>");
-					$("#modal-overlay").fadeIn("slow");
-					var c = $(this);
-					var bgColor = c.css("background-color");
-					if(bgColor == "rgb(239, 239, 239)"){		//#efefef
-						modalAction(c, "toUsing");
-					} else if( bgColor == "rgb(255, 255, 0)"){	//yellow
-						modalAction(c, "toEmpty");
-					} else {
-						fade();
-					}
-					delete c;
+					var action = "";
+					if($(this).css("background-color") == "rgb(255, 255, 0)")
+						action = "toEmpty";
+					else if($(this).css("background-color") == "rgb(239, 239, 239)")
+						action = "toUsing";
+					var data = {
+						"room":$(this).parents(".mdl-layout__tab-panel.is-active").attr("id").substring(4),
+						"desk":$(this).html(),
+						"status":(action == "toUsing") ? 1 : 0
+					};
+					console.log(data);
+					if(action == "toEmpty")
+						$(this).css("background-color", "");
+					else if(action == "toUsing")
+						$(this).css("background-color", "yellow");
+
+					setstatus(data, $(this));
 				});
 			});
 
@@ -245,28 +250,6 @@ require_once("get.php");
 				}
 
 			});
-
-
-			function modalAction(c, action){
-				var msg = (action == "toUsing") ? "使用中" : "空席" ;
-				$("#modal-comment").append("<p id='comment'>"+c.html()+"番の座席を"+msg+"にしますか？</p>");
-				$("#modal").fadeIn("slow").removeClass("is-hide");
-				$(document).off().on("click", function(e){
-				var idName = e.target.id;
-				if( idName == "modal-overlay" || idName == "modal-close" ){
-					fadeout();
-				}else if( idName == "submit" ){
-					var data = {
-						"room":c.parents(".mdl-layout__tab-panel.is-active").attr("id").substring(4),
-						"desk":c.html(),
-						"status":(action == "toUsing") ? 1 : 0
-					};
-					setstatus(data, c);
-					fadeout();
-					c.css("background-color", (action == "toUsing") ? "yellow" : "");
-				}
-				});
-			}
 
 			function fadeout(){
 				$("#modal, #modal-overlay").fadeOut("slow", function(){
