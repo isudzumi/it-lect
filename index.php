@@ -130,7 +130,6 @@ require_once("get.php");
 						"desk":$(this).html(),
 						"status":(action == "toUsing") ? 1 : 0
 					};
-					console.log(data);
 					if(action == "toEmpty")
 						$(this).css("background-color", "");
 					else if(action == "toUsing")
@@ -265,15 +264,13 @@ require_once("get.php");
 					data:data,
 					timeout:10000,
 					beforeSend:function(){
-						$("#submit").attr('disabled', true);
-						$("#submit").css("background-color", "lightgray");
+						c.attr('disabled', true);
 					}
 				}).fail(function(xhr, ts, err){
 					c.css("background-color", data["status"]==1 ? "" : "yellow");
 					alert("Fail : "+ts+", "+err.massage);
 				}).always(function(){
-					$("#submit").attr('disabled', false);
-					$("#submit").css("background-color", "lightgreen");
+					c.attr('disabled', false);
 				});
 			}
 
