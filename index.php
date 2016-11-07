@@ -184,36 +184,68 @@ require_once("get.php");
 			});
 
 			//画面スワイプ
+			var roomAry = [1112, 1111, 1110];
 			$(function(){
-				var pos = $(".mdl-layout__tab-panel").on("touchstart", touchStart);
-				$(".mdl-layout__tab-panel").on("touchmove", function(e){
-					touchMove(e, pos);
-				});
+				$(".mdl-layout__tab-panel").on("touchstart", touchStart);
+				$(".mdl-layout__tab-panel").on("touchmove" , touchMove);
+				$(".mdl-layout__tab-panel").on("touchend"  , touchEnd);
+				
+				var pos, dir;
+
+				function touchStart(e) {
+					pos = position(e);
+					dir = '';
+				}
+
+				function touchMove(e) {
+					now = position(e);
+					if(now - pos > 70) {
+						dir = 'right';
+					} else if (now - pos < -70) {
+						dir = 'left';
+					}
+				}
+
+				function touchEnd(){
+					if(dir == 'right') {
+						changeSection("right");
+					} else if(dir == 'left') {
+						changeSection("left");
+					}
+				}
+
+				function changeSection(dir){
+					var id = $(".mdl-layout__tab-panel.is-active").attr("id");
+					if(dir == "right"){
+						for(var i = 1; i < roomAry.length ; i++) {
+							if("room"+roomAry[i] == id){
+								$("#room"+roomAry[i]).removeClass("is-active");
+								$("#room"+roomAry[i-1]).addClass("is-active");
+								$(".mdl-layout__tab:eq("+i+")").removeClass("is-active");
+								$(".mdl-layout__tab:eq("+(i-1)+")").addClass("is-active");
+								break;
+							}
+						}
+					} else if(dir == "left"){
+						for(var i = 0; i < roomAry.length-1 ; i++) {
+							if("room"+roomAry[i] == id){
+								$("#room"+roomAry[i]).removeClass("is-active");
+								$("#room"+roomAry[i+1]).addClass("is-active");
+								$(".mdl-layout__tab:eq("+i+")").removeClass("is-active");
+								$(".mdl-layout__tab:eq("+(i+1)+")").addClass("is-active");
+								break;
+							}
+						}
+					}
+				}
+
+				function position(e) {
+					var x = e.originalEvent.touches[0].pageX;
+					return x;
+				}
+
 			});
 
-			function touchStart(e) {
-				var pos = position(e);
-				return pos;
-			}
-
-			function touchMove(e, startpos) {
-				var pos = position(e);
-				console.log(startpos);
-				if(startpos.x - pos.x > 70) {
-					console.log("right");
-				} else if (pos.x - startpos.x < -70) {
-					console.log("left");
-				}
-			}
-
-			function position(e) {
-				var x = e.originalEvent.touches[0].pageX;
-				var y = e.originalEvent.touches[0].pageY;
-				x = Math.floor(x);
-				y = Math.floor(y);
-				var pos = {'x':x, 'y':y};
-				return pos;
-			}
 
 			function modalAction(c, action){
 				var msg = (action == "toUsing") ? "使用中" : "空席" ;
