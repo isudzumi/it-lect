@@ -147,10 +147,6 @@ h3 {
 	width: 95%;
 	margin-right:auto;
 	float: left;
-<<<<<<< c729f688d4c0cdfc951ea063cd0b9b6d5b223e18
-=======
-	display:-webkit-box;
->>>>>>> fix bug
 	display:-webkit-flex;
 	display:flex;
 	-webkit-flex-direction:row-reverse;
