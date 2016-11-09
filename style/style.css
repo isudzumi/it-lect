@@ -35,16 +35,10 @@ h3 {
 	padding 32px;
 }
 
-#option {
-	margin : 20px 56px 0 calc(100% - 200px);
-	z-index: 3;
-	position: absolute;
-}
-
 #reset {
-	background-color:white;
-	color:green;
+	color:black;
 	font-weight: bold;
+	height: 56px;
 }
 
 #toggle {

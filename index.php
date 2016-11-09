@@ -31,12 +31,6 @@ require_once("get.php");
 		<a href="#room<?=$room?>" class="mdl-layout__tab <?=($room)==1112 ? "is-active" : ""?>"><?=$room?>教室</a>
 	<?php endforeach; ?>
 	</div>
-	<div id="option">
-		<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="sync" id="toggle">
-			<input type="checkbox" id="sync" class="mdl-switch__input">
-			<span class="mdl-swich__label"></span>
-		</label>
-	</div>
 </header>
 <div class="mdl-layout__drawer">
 	<span class="mdl-layout-title">試験教室</span>
