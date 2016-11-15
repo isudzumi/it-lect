@@ -45,7 +45,10 @@ require_once("get.php");
 		<a class="mdl-navigation__link" href="https://docs.google.com/forms/d/e/1FAIpQLSfNPoLfWMFwKZkba3y50uMj-mLXa0JsZjK1OacPe3K8FyYolQ/viewform" target="_blank">IT講習会不正行為疑い事例報告フォーム</a>
 		<a class="mdl-navigation__link" href="https://github.com/isudzumi/it-lect-using-desk" target="_blank">開発元</a>
 		<a class="mdl-navigation__link">設定</a>
+<<<<<<< HEAD
 		<button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="reset">Reset</button>
+=======
+>>>>>>> c729f68... improve layout
 	</nav>
 </div>
 <main class="mdl-layout__content">
