@@ -31,12 +31,6 @@ require_once("get.php");
 		<a href="#room<?=$room?>" class="mdl-layout__tab <?=($room)==1112 ? "is-active" : ""?>"><?=$room?>教室</a>
 	<?php endforeach; ?>
 	</div>
-	<div id="option">
-		<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="sync" id="toggle">
-			<input type="checkbox" id="sync" class="mdl-switch__input">
-			<span class="mdl-swich__label"></span>
-		</label>
-	</div>
 </header>
 <div class="mdl-layout__drawer">
 	<span class="mdl-layout-title">試験教室</span>
@@ -173,6 +167,7 @@ require_once("get.php");
 
 			//自動更新
 			$(function(){
+<<<<<<< HEAD
 				$.ajax({
 					type:'POST',
 					url :'update.php',
@@ -192,7 +187,38 @@ require_once("get.php");
 					console.log(ts);
 					console.log(err.message);
 				});
+=======
+				setInterval(function(){
+					$.ajax({
+						type:'POST',
+						url :'update.php',
+					}).done(function(data){
+							var obj = JSON.parse(data);
+							compare(obj);
+					}).fail(function(xhr, ts, err){
+						console.log(xhr.status);
+						console.log(xhr.readyState);
+						console.log(xhr.responseText);
+						console.log(ts);
+						console.log(err.message);
+					});
+				}, 60000);
+>>>>>>> f7ea71f2cd7eac38bf9c14c1d6176de375e10873
 			});
+
+			function compare(update) {
+				var cell;
+				for(var i in update) {
+					for(var j in update[i]){
+						cell = $("#desk-"+i).find(".cell").eq(j-1).css("background-color");
+						if ((cell == "rgb(211, 211, 211)") && (update[i][j] == 1)) {
+							$("#desk-"+i).find(".cell").eq(j-1).css("background-color", "yellow");
+						} else if((cell == "rgb(255, 255, 0)") && (update[i][j] == 0)) {
+							$("#desk-"+i).find(".cell").eq(j-1).css("background-color", "");
+						}
+					}
+				}
+			}
 
 			//画面スワイプ
 			var roomAry = [1112, 1111, 1110];

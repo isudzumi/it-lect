@@ -35,16 +35,10 @@ h3 {
 	padding 32px;
 }
 
-#option {
-	margin : 20px 56px 0 calc(100% - 200px);
-	z-index: 3;
-	position: absolute;
-}
-
 #reset {
-	background-color:white;
-	color:green;
+	color:black;
 	font-weight: bold;
+	height: 56px;
 }
 
 #toggle {
@@ -153,7 +147,6 @@ h3 {
 	width: 95%;
 	margin-right:auto;
 	float: left;
-	display:-webkit-box;
 	display:-webkit-flex;
 	display:flex;
 	-webkit-flex-direction:row-reverse;
@@ -174,6 +167,7 @@ h3 {
 	width : 45%;
 	-webkit-flex-direction: column;
 	flex-direction: column;
+	-webkit-flex-wrap     : nowrap;
 	flex-wrap     : nowrap;
 }
 
@@ -186,6 +180,7 @@ h3 {
 }
 
 .desk-right {
+	-webkit-flex-direction: row-reverse;
 	flex-direction: row-reverse;
 	flex-wrap     : nowrap;
 	flex-grow     : 1 ;

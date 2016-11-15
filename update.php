@@ -2,4 +2,4 @@
 
 require("get.php");
 
-print_r($statAry);
+echo json_encode($statAry);
