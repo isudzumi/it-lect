@@ -176,6 +176,7 @@ require_once("get.php");
 
 			//自動更新
 			$(function(){
+<<<<<<< HEAD
 				$.ajax({
 					type:'POST',
 					url :'update.php',
@@ -195,7 +196,38 @@ require_once("get.php");
 					console.log(ts);
 					console.log(err.message);
 				});
+=======
+				setInterval(function(){
+					$.ajax({
+						type:'POST',
+						url :'update.php',
+					}).done(function(data){
+							var obj = JSON.parse(data);
+							compare(obj);
+					}).fail(function(xhr, ts, err){
+						console.log(xhr.status);
+						console.log(xhr.readyState);
+						console.log(xhr.responseText);
+						console.log(ts);
+						console.log(err.message);
+					});
+				}, 60000);
+>>>>>>> bdda348... add autoload function
 			});
+
+			function compare(update) {
+				var cell;
+				for(var i in update) {
+					for(var j in update[i]){
+						cell = $("#desk-"+i).find(".cell").eq(j-1).css("background-color");
+						if ((cell == "rgb(211, 211, 211)") && (update[i][j] == 1)) {
+							$("#desk-"+i).find(".cell").eq(j-1).css("background-color", "yellow");
+						} else if((cell == "rgb(255, 255, 0)") && (update[i][j] == 0)) {
+							$("#desk-"+i).find(".cell").eq(j-1).css("background-color", "");
+						}
+					}
+				}
+			}
 
 			//画面スワイプ
 			var roomAry = [1112, 1111, 1110];
