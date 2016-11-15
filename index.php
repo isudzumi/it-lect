@@ -178,6 +178,13 @@ require_once("get.php");
 					url :'update.php',
 				}).done(function(data){
 						console.log(data);
+						for(var i in data) {
+							for(var j in data[i].room){
+								for(var k in data[i].room[j].status){
+									console.log(data[i].room[j].staus[k]);
+								}
+							}
+						}
 				}).fail(function(xhr, ts, err){
 					console.log(xhr.status);
 					console.log(xhr.readyState);
