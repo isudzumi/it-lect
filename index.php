@@ -171,6 +171,7 @@ require_once("get.php");
 			//自動更新
 			$(function(){
 <<<<<<< HEAD
+<<<<<<< HEAD
 				$.ajax({
 					type:'POST',
 					url :'update.php',
@@ -191,6 +192,8 @@ require_once("get.php");
 					console.log(err.message);
 				});
 =======
+=======
+>>>>>>> eea059e... add autoload function
 				setInterval(function(){
 					$.ajax({
 						type:'POST',
@@ -206,7 +209,10 @@ require_once("get.php");
 						console.log(err.message);
 					});
 				}, 60000);
+<<<<<<< HEAD
 >>>>>>> bdda348... add autoload function
+=======
+>>>>>>> eea059e... add autoload function
 			});
 
 			function compare(update) {
