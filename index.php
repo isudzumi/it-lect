@@ -172,6 +172,9 @@ require_once("get.php");
 			$(function(){
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> cd9c249aba523ef6b3ac6bce77e5886caae5c36b
 				$.ajax({
 					type:'POST',
 					url :'update.php',
@@ -191,9 +194,9 @@ require_once("get.php");
 					console.log(ts);
 					console.log(err.message);
 				});
-=======
-=======
->>>>>>> eea059e... add autoload function
+       
+            
+       
 				setInterval(function(){
 					$.ajax({
 						type:'POST',
@@ -209,10 +212,6 @@ require_once("get.php");
 						console.log(err.message);
 					});
 				}, 60000);
-<<<<<<< HEAD
->>>>>>> bdda348... add autoload function
-=======
->>>>>>> eea059e... add autoload function
 			});
 
 			function compare(update) {

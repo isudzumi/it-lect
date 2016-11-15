@@ -147,10 +147,13 @@ h3 {
 	width: 95%;
 	margin-right:auto;
 	float: left;
+<<<<<<< HEAD
         HEAD:style/style.css
 	display:-webkit-box;
        
         1edd8d2... fix bug:style.css
+=======
+>>>>>>> cd9c249aba523ef6b3ac6bce77e5886caae5c36b
 	display:-webkit-flex;
 	display:flex;
 	-webkit-flex-direction:row-reverse;
