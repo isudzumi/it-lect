@@ -1,4 +1,26 @@
 <?php
+require_once __DIR__.'/vendor/autoload.php';
+
+//phpdotenv
+use Dotenv\Dotenv;
+$dotenv = new Dotenv(__DIR__);
+$dotenv->load();
+
+//monolog
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+$log = new Logger('MONOLOG_TEST');
+$handler = new StreamHandler('./app.log', Logger::DEBUG);
+$log->pushHandler($handler);
+
+//firebase-php
+$dburl  = getenv('databaseURL');
+$token = getenv('databaseSecret');
+$firebase = new \Firebase\FirebaseLib($dburl, $token);
+
+echo $firebase->get('/room/1112');
+$log->addDebug('Debug');
+
 $deskline = [			//机の縦1列の長さ
 	1112 => [5, 7, 7],
 	1111 => [5, 7, 6],
@@ -37,7 +59,7 @@ require_once("get.php");
 	<nav class="mdl-navigation">
 		<a class="mdl-navigation__link" href="https://docs.google.com/spreadsheets/d/1LDDefOWRvG-Tr6vlrqGLQe3mewMBNZQkcrOMANyJ-AU/edit?usp=sharing" target="_blank">IT-Aご意見帳</a>
 		<a class="mdl-navigation__link" href="https://docs.google.com/forms/d/e/1FAIpQLSfNPoLfWMFwKZkba3y50uMj-mLXa0JsZjK1OacPe3K8FyYolQ/viewform" target="_blank">IT講習会不正行為疑い事例報告フォーム</a>
-		<a class="mdl-navigation__link" href="https://github.com/isudzumi/it-lect-using-desk" target="_blank">開発元</a>
+		<a class="mdl-navigation__link" href="https://github.com/isudzumi/it-lect" target="_blank">開発元</a>
 		<a class="mdl-navigation__link">設定</a>
 		<button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="reset">Reset</button>
 	</nav>

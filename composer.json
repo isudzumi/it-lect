@@ -1,0 +1,17 @@
+{
+    "name": "isudzumi/it-lect",
+    "type": "library",
+    "require": {
+        "vlucas/phpdotenv": "@stable",
+        "monolog/monolog": "@stable",
+        "ktamas77/firebase-php": "dev-master",
+        "php": "^5.6"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "isudzumi",
+            "email": "isudzumi@gmail.com"
+        }
+    ]
+}
