@@ -18,7 +18,8 @@ $dburl  = getenv('databaseURL');
 $token = getenv('databaseSecret');
 $firebase = new \Firebase\FirebaseLib($dburl, $token);
 
-echo $firebase->get('/room/1112');
+$ary = $firebase->get('/room');
+$ary = json_decode($ary, true);
 $log->addDebug('Debug');
 
 $deskline = [			//机の縦1列の長さ
@@ -26,6 +27,8 @@ $deskline = [			//机の縦1列の長さ
 	1111 => [5, 7, 6],
 	1110 => [5, 7, 7],
 ];
+
+$roomOrder = [1112, 1111, 1110];//データベースからただ持ってくるだけだと1110教室から表示されてしまうため順番を指定する
 
 require_once("get.php");
 
@@ -49,7 +52,7 @@ require_once("get.php");
 		<span class="mdl-layout-title"><h3>試験教室 座席表</h3></span>
 	</div>
 	<div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-	<?php foreach($deskline as $room => $desk): ?>
+	<?php foreach($roomOrder as $room): ?>
 		<a href="#room<?=$room?>" class="mdl-layout__tab <?=($room)==1112 ? "is-active" : ""?>"><?=$room?>教室</a>
 	<?php endforeach; ?>
 	</div>
@@ -66,60 +69,66 @@ require_once("get.php");
 </div>
 <main class="mdl-layout__content">
 
-	<?php foreach($deskline as $room => $desk): ?>
+	<?php foreach($roomOrder as $room): ?>
 	<section id="room<?=$room?>" class="mdl-layout__tab-panel <?=($room)==1112 ? "is-active" : ""?>">
 	<div class="room page__content">
 		<div class="board">スクリーン</div>
 		<div id="pc-<?=$room?>" class="pc">教員PC</div>
-		<?php if($room == 1110): ?>
+		<?php if($ary["$room"]['door']['direction'] == 'left') : ?>
 			
 			<div class="door-area door-area-left">
-				<div class="door wall door-left">前方ドア<?=($room == 1111) ? "(※締切)" : "" ?></div>
-				<div class="door door-left">後方ドア<?=($room != 1111) ? "(※締切)" : "" ?></div>
+				<div class="door wall door-left">前方ドア<?=($ary["$room"]["door"]['front'] == 'close') ? "(※締切)" : "" ?></div>
+				<div class="door door-left">後方ドア<?=($ary["$room"]["door"]['back'] == 'close') ? "(※締切)" : "" ?></div>
 			</div>
 		<?php endif; ?>
 
 		<div class="desk-area" id="desk-<?=$room?>">
-			<?php
-				//机の列の配列を作る
-				$lineAry = [];
-				foreach($desk as $value){
-					array_push($lineAry, $value);
-				}
-			?>
-			<?php for($i = 1; $i<=($lineAry[0]+$lineAry[1]+$lineAry[2])*2; $i++):?>
-				<?php if($i == 1 || $i == 1+($lineAry[0]*2) || $i == 1+($lineAry[0]+$lineAry[1])*2):						//the number of the upper left desk ?>
+		<?php
+			$i = 1;
+			foreach($ary["$room"]['column'] as $col => $desk):
+				$count = count($ary["$room"]['column'][$col]);
+				for($j = 1; $j <= $count; $j++):
+					if((substr($col, 4) % 2 == 1) && ($j == 1)):
+		?>
 
 				<div class='desk-block desk-right'>
-				<div class="column <?=($room != 1110) ? 'right' : 'left'?>">
-				<?php endif; ?>
-				<?php if($i == 1+$lineAry[0] || $i == 1+($lineAry[0]*2)+$lineAry[1] || $i == 1+(($lineAry[0]+$lineAry[1])*2)+$lineAry[2]):	//the number of the upper right desk ?>
+					<div class="column <?=($room != 1110) ? 'right' : 'left'?>">
+		<?php
+					elseif((substr($col, 4) % 2 == 0) && ($j == 1)):
+		?>
 
 					</div>
 					<div class="column <?=($room != 1110) ? 'left' : 'right'?>">
-				<?php endif; ?>
-				<?php $stat = ($statAry["$room"]["$i"] == 1) ? ' style="background-color: yellow"' : "" ; ?>
+		<?php
+					endif;
+		?>
+					<?php $bgcolor = ($ary["$room"]['column']["$col"]['desk-'.$i] == 1) ? ' style="background-color: yellow"' : "" ; ?>
 
-							<div class="cell"<?=$stat?>><?=$i?></div>
-				<?php if($i == $lineAry[0]*2 || $i == ($lineAry[0]+$lineAry[1])*2 || $i == ($lineAry[0]+$lineAry[1]+$lineAry[2])*2):		//the number of the lower left desk ?>
+						<div class="cell"<?=$bgcolor?>><?=$i?></div>
+		<?php
+					if((substr($col, 4) % 2 == 0) && ($j == $count)):
+		?>
 
 					</div>
 				</div>
-				<?php endif; ?>
-			<?php endfor; ?>
-			</div>
-			<?php if($room != 1110): ?>
-			
-			<div class="door-area door-area-right">
-				<div class="door wall door-right">前方ドア<?=($room == 1111) ? "(※締切)" : "" ?></div>
-				<div class="door door-right">後方ドア<?=($room != 1111) ? "(※締切)" : "" ?></div>
-			</div>
-			<?php endif; ?>
+		<?php
+					endif;
+					$i++;
+				endfor;
+			endforeach;
+		?>
 		</div>
-		</section>
+		<?php if($ary["$room"]["door"]['direction'] == 'right'): ?>
+		
+		<div class="door-area door-area-right">
+			<div class="door wall door-right">前方ドア<?=($ary["$room"]["door"]['front'] == 'close') ? "(※締切)" : "" ?></div>
+			<div class="door door-right">後方ドア<?=($ary["$room"]["door"]['back'] == 'close')  ? "(※締切)" : "" ?></div>
+		</div>
+		<?php endif; ?>
 
+	</div>
+	</section>
 	<?php endforeach; ?>
-
 </main>
 </div>
 <dialog id="modal" class="is-hide mdl-dialog">
@@ -306,5 +315,5 @@ require_once("get.php");
 					c.attr('disabled', false);
 				});
 			}
-
+ 
 </script>
